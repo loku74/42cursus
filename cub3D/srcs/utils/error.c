@@ -14,7 +14,7 @@
 
 void	print_error_message(void)
 {
-	ft_putstr_color_fd("Error\n", RED, STDERR_FILENO, TRUE);
+	ft_putstr_color_fd("Error", RED, STDERR_FILENO, TRUE);
 }
 
 void	print_file_error_message(char *file)
