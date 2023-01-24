@@ -6,13 +6,15 @@
 #    By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 11:29:55 by lbourniq          #+#    #+#              #
-#    Updated: 2022/12/03 08:56:43 by lbourniq         ###   ########lyon.fr    #
+#    Updated: 2023/01/24 17:09:30 by lbourniq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Colors
 GREEN = \033[1;32m
 PURPLE = \033[1;35m
+CYAN = \033[1;36m
+YELLOW = \033[1;33m
 NC = \033[0m
 
 # Name of the lib
@@ -129,7 +131,9 @@ $(NAME): $(LIBFT_OBJS_FILES) $(FT_PRINTF_OBJS_FILES) $(GNL_OBJS_FILES)
 	@echo "${GREEN}-> $(NAME) compiled successfully${NC}"
 
 %.o: %.c Makefile $(ALL_HEADERS)
+	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "${GREEN} OK!${NC}\n"
 
 clean: 
 	@$(RM) $(RM_FLAGS) $(LIBFT_OBJS_FILES) \
