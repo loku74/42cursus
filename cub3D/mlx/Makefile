@@ -22,7 +22,9 @@ CFLAGS+= -DSTRINGPUTX11 -Wno-deprecated-declarations
 
 
 .m.o:
-	@cc $(CFLAGS) -c $< -o $@
+	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "${GREEN} OK!${NC}\n"
 
 all: $(NOM)
 
@@ -32,7 +34,14 @@ $(NOM):	$(OBJ)
 	@echo "${GREEN}-> MinilibX library compiled successfully${NC}"
 
 clean:
-	@rm -f $(NOM) $(OBJ) *~
+	@rm -f $(OBJ) *~
 	@rm -f mlx_app
+	@printf "${PURPLE}-> All Minilibx objs files removed successfully${NC}\n"
+
+
+fclean:
+	@rm -f $(NOM) $(OBJ) *~
+	@printf "${PURPLE}-> All Minilibx objs files and $(NOM) library removed successfully${NC}\n"
+
 
 re: clean all

@@ -91,13 +91,14 @@ clean:
 	@make -C ./libft/. clean
 	@make -C ./mlx/. clean
 	@$(RM) $(RM_FLAGS) $(OBJS)
-	@printf "${PURPLE}-> All cub3D objs files and MinilibX objs files removed successfully${NC}\n"
+	@printf "${PURPLE}-> All cub3D objs files removed successfully${NC}\n"
+
 
 fclean:
 	@make -C ./libft/ fclean
-	@make -C ./mlx/. clean
+	@make -C ./mlx/. fclean
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
-	@printf "${PURPLE}-> All cub3D objs files, MinilibX objs files and cub3D executable removed successfully${NC}\n"
+	@printf "${PURPLE}-> All cub3D objs files and $(NAME) executable removed successfully${NC}\n"
 
 re:
 	@make fclean

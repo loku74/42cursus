@@ -145,7 +145,7 @@ fclean:
 	@$(RM) $(RM_FLAGS) $(NAME) $(LIBFT_OBJS_FILES) \
 	$(FT_PRINTF_OBJS_FILES) \
 	$(GNL_OBJS_FILES)
-	@echo "${PURPLE}-> $(NAME) and objs files removed successfully${NC}"
+	@echo "${PURPLE}-> All libft objs files and $(NAME) library removed successfully${NC}"
 
 re: fclean all
 
