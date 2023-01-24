@@ -1,6 +1,8 @@
 # Colors
 GREEN = \033[1;32m
 PURPLE = \033[1;35m
+CYAN = \033[1;36m
+YELLOW = \033[1;33m
 NC = \033[0m
 
 NOM=libmlx.a
@@ -14,7 +16,10 @@ CFLAGS+=-O2
 CFLAGS+= -DSTRINGPUTX11 -Wno-deprecated-declarations
 
 .c.o:
-	@cc $(CFLAGS) -c $< -o $@
+	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "${GREEN} OK!${NC}\n"
+
 
 .m.o:
 	@cc $(CFLAGS) -c $< -o $@
