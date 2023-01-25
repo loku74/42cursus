@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   strdup_no_nl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 09:55:44 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/01/24 09:55:45 by lbourniq         ###   ########lyon.fr   */
+/*   Created: 2023/01/25 17:47:51 by lbourniq          #+#    #+#             */
+/*   Updated: 2023/01/25 17:47:52 by lbourniq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
-int	main(int argc, char **argv)
+char	*strdup_no_nl(const char *str)
 {
-	t_data	data;
+	char	*ret;
+	int		i;
 
-	data.head = create_new_dict();
-	if (data.head == NULL)
-		return (ERROR);
-	if (parsing(&data, argv, argc))
-		return (ERROR);
-	return (SUCCESS);
+	ret = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (str && str[i] && str[i] != '\n')
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }

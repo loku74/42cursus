@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   len_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 09:55:44 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/01/24 09:55:45 by lbourniq         ###   ########lyon.fr   */
+/*   Created: 2023/01/25 17:17:06 by lbourniq          #+#    #+#             */
+/*   Updated: 2023/01/25 17:17:07 by lbourniq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
-int	main(int argc, char **argv)
+int	len_split(char **split)
 {
-	t_data	data;
+	int	i;
 
-	data.head = create_new_dict();
-	if (data.head == NULL)
-		return (ERROR);
-	if (parsing(&data, argv, argc))
-		return (ERROR);
-	return (SUCCESS);
+	i = 0;
+	while (split[i] != NULL)
+		i++;
+	return (i);
+}
+
+int	len_dict(t_dict *dict)
+{
+	int	i;
+
+	i = 0;
+	while (dict != NULL)
+	{
+		dict = dict->next;
+		i++;
+	}
+	return (i);
 }

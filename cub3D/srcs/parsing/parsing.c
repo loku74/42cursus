@@ -51,5 +51,7 @@ t_exit	parsing(t_data *data, char **argv, int argc)
 		return (ERROR);
 	if (open_file(data, argv[1]))
 		return (ERROR);
+	if (get_map_info(data))
+		return (ERROR);
 	return (SUCCESS);
 }

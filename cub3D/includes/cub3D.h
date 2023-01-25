@@ -29,6 +29,7 @@ typedef enum e_bool		t_bool;
 typedef enum e_exit		t_exit;
 
 typedef struct s_data	t_data;
+typedef struct s_dict	t_dict;
 
 // FALSE 0, TRUE 1
 enum e_bool
@@ -44,13 +45,28 @@ enum e_exit
 	ERROR
 };
 
+struct s_dict
+{
+	char			*key;
+	char			*value;
+	struct s_dict	*next;
+};
+
 struct s_data
 {
-	int	map_fd;
+	t_dict	*head;
+	int		map_fd;
 };
 
 // parsing functions
 t_exit	parsing(t_data *data, char **argv, int argc);
+t_exit	get_map_info(t_data *data);
+
+// dict functions
+t_dict	*create_new_dict(void);
+t_exit	add_dict(t_dict *head, char *key_in, char *value_in);
+char	*get_value(t_dict *head, char *key);
+void	clear_dict(t_dict *head);
 
 // error functions
 void	print_error_message(void);
@@ -61,5 +77,8 @@ void	print_file_format_error(void);
 // utils functions
 void	ft_putstr_color_fd(char *str, char *color, int fd, int newline);
 t_bool	ft_strrcmp(char *s1, char *s2, int n);
+int		len_split(char **split);
+int		len_dict(t_dict *dict);
+char	*strdup_no_nl(const char *str);
 
 #endif
