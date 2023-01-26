@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	data.mlx = mlx_init();
 	data.head = create_new_dict();
 	if (data.head == NULL)
 		return (ERROR);

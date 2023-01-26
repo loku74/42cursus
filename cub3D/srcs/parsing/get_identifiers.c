@@ -87,7 +87,7 @@ t_exit	get_identifiers(t_data *data)
 			}
 		}
 		free(line);
-		if (len_dict(data->head) != 6)
+		if (len_dict(data->head) != N_IDENTIFIERS)
 			line = get_next_line(data->map_fd);
 		else
 			line = NULL;

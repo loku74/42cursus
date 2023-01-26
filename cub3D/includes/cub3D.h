@@ -21,15 +21,20 @@
 # include <string.h>
 # include <math.h> // to remove if unused
 
+# define N_IDENTIFIERS	6
 # define RED			"\033[1;31m"
 # define YELLOW			"\033[1;33m"
 # define NC				"\033[0m"
+# define R				0
+# define G				1
+# define B				2
 
-typedef enum e_bool		t_bool;
-typedef enum e_exit		t_exit;
+typedef enum e_bool			t_bool;
+typedef enum e_exit			t_exit;
 
-typedef struct s_data	t_data;
-typedef struct s_dict	t_dict;
+typedef struct s_data		t_data;
+typedef struct s_dict		t_dict;
+typedef struct s_textures	t_textures;
 
 // FALSE 0, TRUE 1
 enum e_bool
@@ -52,10 +57,25 @@ struct s_dict
 	struct s_dict	*next;
 };
 
+struct s_textures
+{
+	void	*east;
+	void	*west;
+	void	*south;
+	void	*north;
+	int		**floor_color;
+	int		**ceiling_color;
+};
+
 struct s_data
 {
-	t_dict	*head;
-	int		map_fd;
+	t_dict		*head;
+	t_textures	textures;
+	void		*mlx;
+	void		*mlx_win;
+	int 		img_width;
+	int			img_height;
+	int			map_fd;
 };
 
 // parsing functions
