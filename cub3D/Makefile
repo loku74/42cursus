@@ -58,15 +58,18 @@ UTILS_DIR = $(addprefix $(SRCS_DIR), utils/)
 MAIN_SRCS = cub3D.c
 MAIN_FILE = $(addprefix $(SRCS_DIR), $(MAIN_SRCS))
 
-PARSING_SRCS = parsing.c\
-				get_map_info.c\
-				dict.c
+PARSING_SRCS = parsing.c \
+				get_identifiers.c \
+				check_identifiers.c \
+				get_map.c \
+				check_map.c
 PARSING_FILES = $(addprefix $(PARSING_DIR), $(PARSING_SRCS))
 
 UTILS_SRCS = ft_putstr_color_fd.c \
 				ft_strrcmp.c \
 				error.c \
-				len.c\
+				len.c \
+				dict.c \
 				strdup_no_nl.c
 UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 

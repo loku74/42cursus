@@ -60,7 +60,10 @@ struct s_data
 
 // parsing functions
 t_exit	parsing(t_data *data, char **argv, int argc);
-t_exit	get_map_info(t_data *data);
+t_exit	get_identifiers(t_data *data);
+t_exit	check_identifiers(t_data *data);
+t_exit	get_map(t_data *data);
+t_exit	check_map(t_data *data);
 
 // dict functions
 t_dict	*create_new_dict(void);
