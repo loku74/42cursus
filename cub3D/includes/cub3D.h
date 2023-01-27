@@ -31,12 +31,16 @@
 # define SO				1
 # define WE				2
 # define EA				3
-# define RED			"\033[1;31m"
-# define YELLOW			"\033[1;33m"
-# define NC				"\033[0m"
 # define R				0
 # define G				1
 # define B				2
+# define RED			"\033[1;31m"
+# define YELLOW			"\033[1;33m"
+# define NC				"\033[0m"
+# define MALLOC_ERROR	"Malloc Error"
+# define RGB_ERROR		"Invalid RGB input"
+# define XPM_ERROR		"Path to texture not valid or has the wrong extension"
+# define MISSING_IDS	"Some map identifiers are missing"
 
 typedef enum e_bool			t_bool;
 typedef enum e_exit			t_exit;

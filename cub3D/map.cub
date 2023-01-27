@@ -1,9 +1,15 @@
 EA ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
 WE ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+
 C 255,30,0
+
 SO ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
 NO ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+
 F 220,100,0
+
+
+
 1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001

@@ -57,7 +57,7 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 t_exit	get_identifiers(t_data *data)
 {
 	char		*line;
-	static char	*ids[N_IDENTIFIERS] = {"NO", "SO", "WE", "EA", "F", "C"};
+	static char	*ids[N_IDENTIFIERS] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
 
 	line = get_next_line(data->map_fd);
 	while (line)

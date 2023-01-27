@@ -17,6 +17,7 @@ static t_exit	open_file(t_data *data, char *file)
 	data->map_fd = open(file, O_RDONLY);
 	if (data->map_fd == -1)
 	{
+		clear_dict(data->head);
 		print_file_error_message(file);
 		return (ERROR);
 	}
@@ -34,11 +35,12 @@ static t_exit	check_file_format(t_data *data, char *file)
 	return (SUCCESS);
 }
 
-static t_exit	check_args_count(int argc)
+static t_exit	check_args_count(t_data *data, int argc)
 {
 	if (argc != 2)
 	{
 		print_args_error_message(argc);
+		clear_dict(data->head);
 		return (ERROR);
 	}
 	return (SUCCESS);
@@ -46,7 +48,7 @@ static t_exit	check_args_count(int argc)
 
 t_exit	parsing(t_data *data, char **argv, int argc)
 {
-	if (check_args_count(argc))
+	if (check_args_count(data, argc))
 		return (ERROR);
 	if (check_file_format(data, argv[1]))
 		return (ERROR);

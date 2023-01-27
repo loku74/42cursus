@@ -12,13 +12,29 @@
 
 #include "../../includes/cub3D.h"
 
+static int	num_len(char *num)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (num[i])
+	{
+		if (num[i] != '0')
+			k++;
+		i++;
+	}
+	return (k);
+}
+
 t_exit	check_num(char *num)
 {
 	int	i;
 	int	num_int;
 
 	i = 0;
-	if (ft_strlen(num) > 3)
+	if (num_len(num) > 3)
 		return (ERROR);
 	while (num[i])
 	{
