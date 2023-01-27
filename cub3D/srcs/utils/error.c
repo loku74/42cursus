@@ -41,3 +41,10 @@ void	print_file_format_error(void)
 	ft_putstr_color_fd("The map must have the .cub extension", \
 	YELLOW, STDERR_FILENO, TRUE);
 }
+
+t_exit	r_error(char *str)
+{
+	print_error_message();
+	ft_putstr_color_fd(str, YELLOW, STDERR_FILENO, TRUE);
+	return (ERROR);
+}

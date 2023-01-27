@@ -43,10 +43,11 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 			if (len_split(line_split) != 2)
 				return (free_split(line_split), ERROR);
 			else if (get_value(data->head, line_split[0]) != NULL)
-				return (ERROR);
+				return (free_split(line_split), ERROR);
 			else if (add_dict(data->head, line_split[0], line_split[1]))
 				return (free_split(line_split), ERROR);
-			return (free_split(line_split), SUCCESS);
+			free_split(line_split);
+			return (SUCCESS);
 		}
 		i++;
 	}
@@ -65,11 +66,9 @@ t_exit	get_identifiers(t_data *data)
 		{
 			if (parse_map_identifier(data, line, ids))
 			{
-				print_error_message();
-				ft_putstr_color_fd("Couldn't parse map identifiers", \
-				YELLOW, STDERR_FILENO, TRUE);
 				clear_dict(data->head);
-				return (free(line), ERROR);
+				free(line);
+				return (r_error("Couldn't parse map identifiers"));
 			}
 		}
 		free(line);

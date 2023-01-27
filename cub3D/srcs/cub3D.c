@@ -25,6 +25,14 @@ int	main(int argc, char **argv)
 		return (ERROR);
 	printf("ceiling R G B color: %d, %d, %d\n", data.colors[CEILING][R], data.colors[CEILING][G], data.colors[CEILING][B]);
 	printf("floor R G B color: %d, %d, %d\n", data.colors[FLOOR][R], data.colors[FLOOR][G], data.colors[FLOOR][B]);
+	printf("path to EA texture: %s\n", get_value(data.head, "EA"));
+	printf("path to WE texture: %s\n", get_value(data.head, "WE"));
+	printf("path to SO texture: %s\n", get_value(data.head, "SO"));
+	printf("path to NO texture: %s\n", get_value(data.head, "NO"));
+	printf("Address of EA mlx image: %p\n", data.textures[EA]);
+	printf("Address of WE mlx image: %p\n", data.textures[WE]);
+	printf("Address of SO mlx image: %p\n", data.textures[SO]);
+	printf("Address of NO mlx image: %p\n", data.textures[NO]);
 	free_textures(&data, N_TEXTURES, TRUE);
 	free_colors(&data);
 	clear_dict(data.head);

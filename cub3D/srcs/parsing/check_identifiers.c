@@ -56,7 +56,7 @@ static t_exit	parse_rgb_colors(t_data *data, char *colors, int texture)
 	{
 		free_textures(data, N_TEXTURES, TRUE);
 		free_colors(data);
-		return (ERROR);
+		return (r_error("Malloc error"));
 	}
 	i = 0;
 	while (i < RGB_CONSTANT)
@@ -66,7 +66,7 @@ static t_exit	parse_rgb_colors(t_data *data, char *colors, int texture)
 			free_textures(data, N_TEXTURES, TRUE);
 			free_colors(data);
 			free_split(color_set);
-			return (ERROR);
+			return (r_error("Invalid RGB input"));
 		}
 		else
 			data->colors[texture][i] = ft_atoi(color_set[i]);
@@ -82,8 +82,6 @@ static t_exit	treat_identifiers(t_data *data)
 	int			i;
 
 	i = 0;
-	if (set_textures(data) || set_colors(data))
-		return (ERROR);
 	while (i < N_IDENTIFIERS)
 	{
 		value = get_value(data->head, ids[i]);
@@ -94,7 +92,8 @@ static t_exit	treat_identifiers(t_data *data)
 			if (data->textures[i] == NULL)
 			{
 				free_textures(data, i, TRUE);
-				return (free_colors(data), ERROR);
+				free_colors(data);
+				return (r_error("Path to image not valid or wrong extension"));
 			}
 		}
 		else if (parse_rgb_colors(data, value, i - N_TEXTURES))
@@ -106,12 +105,14 @@ static t_exit	treat_identifiers(t_data *data)
 
 t_exit	check_identifiers(t_data *data)
 {
+	if (set_textures(data) || set_colors(data))
+	{
+		clear_dict(data->head);
+		return (r_error("Malloc error"));
+	}
 	if (len_dict(data->head) != N_IDENTIFIERS || treat_identifiers(data))
 	{
 		clear_dict(data->head);
-		print_error_message();
-		ft_putstr_color_fd("Couldn't parse map identifiers", \
-		YELLOW, STDERR_FILENO, TRUE);
 		return (ERROR);
 	}
 	return (SUCCESS);

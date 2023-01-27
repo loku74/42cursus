@@ -27,10 +27,10 @@
 # define RGB_CONSTANT	3
 # define FLOOR			0
 # define CEILING		1
-# define NORTH			0
-# define SOUTH			1
-# define WEST			2
-# define EAST			3
+# define NO				0
+# define SO				1
+# define WE				2
+# define EA				3
 # define RED			"\033[1;31m"
 # define YELLOW			"\033[1;33m"
 # define NC				"\033[0m"
@@ -95,6 +95,7 @@ void	print_error_message(void);
 void	print_file_error_message(char *file);
 void	print_args_error_message(int argc);
 void	print_file_format_error(void);
+t_exit	r_error(char *str);
 
 // utils functions
 void	ft_putstr_color_fd(char *str, char *color, int fd, int newline);
