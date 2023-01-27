@@ -23,11 +23,12 @@ static t_exit	open_file(t_data *data, char *file)
 	return (SUCCESS);
 }
 
-static t_exit	check_file_format(char *file)
+static t_exit	check_file_format(t_data *data, char *file)
 {
 	if (ft_strrcmp(file, ".cub", 4) == FALSE)
 	{
 		print_file_format_error();
+		clear_dict(data->head);
 		return (ERROR);
 	}
 	return (SUCCESS);
@@ -47,7 +48,7 @@ t_exit	parsing(t_data *data, char **argv, int argc)
 {
 	if (check_args_count(argc))
 		return (ERROR);
-	if (check_file_format(argv[1]))
+	if (check_file_format(data, argv[1]))
 		return (ERROR);
 	if (open_file(data, argv[1]))
 		return (ERROR);

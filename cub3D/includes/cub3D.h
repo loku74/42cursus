@@ -22,6 +22,15 @@
 # include <math.h> // to remove if unused
 
 # define N_IDENTIFIERS	6
+# define N_TEXTURES		4
+# define N_COLORS		2
+# define RGB_CONSTANT	3
+# define FLOOR			0
+# define CEILING		1
+# define NORTH			0
+# define SOUTH			1
+# define WEST			2
+# define EAST			3
 # define RED			"\033[1;31m"
 # define YELLOW			"\033[1;33m"
 # define NC				"\033[0m"
@@ -34,7 +43,6 @@ typedef enum e_exit			t_exit;
 
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
-typedef struct s_textures	t_textures;
 
 // FALSE 0, TRUE 1
 enum e_bool
@@ -57,23 +65,14 @@ struct s_dict
 	struct s_dict	*next;
 };
 
-struct s_textures
-{
-	void	*east;
-	void	*west;
-	void	*south;
-	void	*north;
-	int		**floor_color;
-	int		**ceiling_color;
-};
-
 struct s_data
 {
 	t_dict		*head;
-	t_textures	textures;
 	void		*mlx;
 	void		*mlx_win;
-	int 		img_width;
+	void		**textures;
+	int			**colors;
+	int			img_width;
 	int			img_height;
 	int			map_fd;
 };
@@ -103,5 +102,11 @@ t_bool	ft_strrcmp(char *s1, char *s2, int n);
 int		len_split(char **split);
 int		len_dict(t_dict *dict);
 char	*strdup_no_nl(const char *str);
+t_exit	check_num(char *num);
+
+// free functions
+void	free_textures(t_data *data, int k, t_bool destroy_img);
+void	free_colors(t_data *data);
+void	free_split(char **str_split);
 
 #endif

@@ -27,27 +27,13 @@ void	print_dict(t_dict *head)
 	}
 }
 
-static void	free_split(char **str_split)
-{
-	int	i;
-
-	i = 0;
-	while (str_split[i])
-	{
-		free(str_split[i]);
-		i++;
-	}
-	free(str_split[i]);
-	free(str_split);
-}
-
 static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 {
 	char	**line_split;
 	int		i;
 
 	i = 0;
-	while (ids[i])
+	while (i < N_IDENTIFIERS)
 	{
 		while (*line == ' ')
 			line++;
@@ -70,14 +56,14 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 t_exit	get_identifiers(t_data *data)
 {
 	char		*line;
-	static char	*identifiers[7] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
+	static char	*ids[N_IDENTIFIERS] = {"NO", "SO", "WE", "EA", "F", "C"};
 
 	line = get_next_line(data->map_fd);
 	while (line)
 	{
 		if (ft_strncmp(line, "\n", 1))
 		{
-			if (parse_map_identifier(data, line, identifiers))
+			if (parse_map_identifier(data, line, ids))
 			{
 				print_error_message();
 				ft_putstr_color_fd("Couldn't parse map identifiers", \

@@ -53,6 +53,7 @@ SRCS_DIR = ./srcs/
 
 PARSING_DIR = $(addprefix $(SRCS_DIR), parsing/)
 UTILS_DIR = $(addprefix $(SRCS_DIR), utils/)
+FREE_DIR = $(addprefix $(SRCS_DIR), free/)
 
 # SRCS Files
 MAIN_SRCS = cub3D.c
@@ -70,10 +71,14 @@ UTILS_SRCS = ft_putstr_color_fd.c \
 				error.c \
 				len.c \
 				dict.c \
-				strdup_no_nl.c
+				strdup_no_nl.c\
+				check_num.c
 UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 
-ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES)
+FREE_SRCS = free.c
+FREE_FILES = $(addprefix $(FREE_DIR), $(FREE_SRCS))
+
+ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES)
 OBJS = $(ALL_SRCS:.c=.o)
 
 # .c.o rule
