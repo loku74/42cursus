@@ -43,7 +43,7 @@ t_exit	check_num(char *num)
 		i++;
 	}
 	num_int = ft_atoi(num);
-	if (num_int < 0 || num_int > 255)
+	if (num_int < 0 OR num_int > 255)
 		return (ERROR);
 	return (SUCCESS);
 }

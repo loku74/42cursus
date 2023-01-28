@@ -26,7 +26,7 @@ static t_exit	open_file(t_data *data, char *file)
 
 static t_exit	check_file_format(t_data *data, char *file)
 {
-	if (ft_strrcmp(file, ".cub", 4) == FALSE)
+	if (ft_strrcmp(file, ".cub", EXTENSION_LEN) == FALSE)
 	{
 		print_file_format_error();
 		clear_dict(data->head);

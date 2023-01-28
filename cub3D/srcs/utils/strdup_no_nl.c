@@ -21,7 +21,7 @@ char	*strdup_no_nl(const char *str)
 	if (!ret)
 		return (NULL);
 	i = 0;
-	while (str && str[i] && str[i] != '\n')
+	while (str AND str[i] AND str[i] != '\n')
 	{
 		ret[i] = str[i];
 		i++;

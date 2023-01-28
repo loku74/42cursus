@@ -22,7 +22,7 @@ NC = \033[0m
 # Header(s)
 HEADER_DIR = ./includes/
 
-HEADER_NAME = cub3D.h
+HEADER_NAMES = cub3D.h ft_macros.h
 
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 

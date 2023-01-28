@@ -50,7 +50,7 @@ t_exit	add_dict(t_dict *head, char *key_in, char *value_in)
 	value = strdup_no_nl(value_in);
 	if (value == NULL)
 		return (ERROR);
-	if (head->key == NULL || head->value == NULL)
+	if (head->key == NULL OR head->value == NULL)
 	{
 		head->key = key;
 		head->value = value;
@@ -70,7 +70,7 @@ char	*get_value(t_dict *head, char *key)
 {
 	while (head)
 	{
-		if (head->key != NULL && strncmp(head->key, key, ft_strlen(key)) == 0)
+		if (head->key != NULL AND strncmp(head->key, key, ft_strlen(key)) == 0)
 			return (head->value);
 		head = head->next;
 	}

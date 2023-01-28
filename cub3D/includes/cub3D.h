@@ -15,12 +15,14 @@
 
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
+# include "ft_macros.h"
 # include <fcntl.h>
 # include <errno.h>
 # include <stdio.h>
 # include <string.h>
 # include <math.h> // to remove if unused
 
+# define EXTENSION_LEN  4
 # define N_IDENTIFIERS	6
 # define N_TEXTURES		4
 # define N_COLORS		2
@@ -39,28 +41,11 @@
 # define NC				"\033[0m"
 # define MALLOC_ERROR	"Malloc Error"
 # define RGB_ERROR		"Invalid RGB input"
-# define XPM_ERROR		"Path to texture not valid or has the wrong extension"
+# define IMG_ERROR		"Path to texture not valid or has the wrong extension"
 # define MISSING_IDS	"Some map identifiers are missing"
-
-typedef enum e_bool			t_bool;
-typedef enum e_exit			t_exit;
 
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
-
-// FALSE 0, TRUE 1
-enum e_bool
-{
-	FALSE,
-	TRUE
-};
-
-// SUCCESS 0, ERROR 1
-enum e_exit
-{
-	SUCCESS,
-	ERROR
-};
 
 struct s_dict
 {

@@ -19,9 +19,9 @@ t_bool	ft_strrcmp(char *s1, char *s2, int n)
 	int	index;
 
 	index = 0;
-	i = ft_strlen(s1) - 1;
-	j = ft_strlen(s2) - 1;
-	while (index < n && (s1[i] == s2[j]) && s1[i] && s2[j])
+	i = (int)ft_strlen(s1) - 1;
+	j = (int)ft_strlen(s2) - 1;
+	while (index < n AND (s1[i] == s2[j]) AND s1[i] AND s2[j])
 	{
 		i--;
 		j--;

@@ -61,7 +61,7 @@ static t_exit	parse_rgb_colors(t_data *data, char *colors, int texture)
 	i = 0;
 	while (i < RGB_CONSTANT)
 	{
-		if (check_num(color_set[i]) || len_split(color_set) != 3)
+		if (check_num(color_set[i]) OR len_split(color_set) != 3)
 		{
 			free_textures(data, N_TEXTURES, TRUE);
 			free_colors(data);
@@ -93,7 +93,7 @@ static t_exit	treat_identifiers(t_data *data)
 			{
 				free_textures(data, i, TRUE);
 				free_colors(data);
-				return (r_error(XPM_ERROR));
+				return (r_error(IMG_ERROR));
 			}
 		}
 		else if (parse_rgb_colors(data, value, i - N_TEXTURES))
@@ -105,7 +105,7 @@ static t_exit	treat_identifiers(t_data *data)
 
 t_exit	check_identifiers(t_data *data)
 {
-	if (set_textures(data) || set_colors(data))
+	if (set_textures(data) OR set_colors(data))
 	{
 		clear_dict(data->head);
 		return (r_error(MALLOC_ERROR));
