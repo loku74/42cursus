@@ -35,11 +35,9 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 	i = 0;
 	while (i < N_IDENTIFIERS)
 	{
-		while (*line == ' ')
-			line++;
-		if (ft_strncmp(line, ids[i], ft_strlen(ids[i])) == 0)
+		line_split = ft_split(line, ' ');
+		if (ft_strncmp(line, ids[i], ft_strlen(line_split[0])) == 0)
 		{
-			line_split = ft_split(line, ' ');
 			if (len_split(line_split) != 2)
 				return (free_split(line_split), ERROR);
 			else if (get_value(data->head, line_split[0]) != NULL)
@@ -49,6 +47,7 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 			free_split(line_split);
 			return (SUCCESS);
 		}
+		free_split(line_split);
 		i++;
 	}
 	return (ERROR);
@@ -57,7 +56,7 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 t_exit	get_identifiers(t_data *data)
 {
 	char		*line;
-	static char	*ids[N_IDENTIFIERS] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
+	static char	*ids[N_IDENTIFIERS] = {"NO", "SO", "WE", "EA", "F", "C"};
 
 	line = get_next_line(data->map_fd);
 	while (line)

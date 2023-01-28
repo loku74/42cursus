@@ -19,10 +19,11 @@ static int	num_len(char *num)
 
 	i = 0;
 	k = 0;
+	while (num[i] == '0')
+		i++;
 	while (num[i])
 	{
-		if (num[i] != '0')
-			k++;
+		k++;
 		i++;
 	}
 	return (k);
