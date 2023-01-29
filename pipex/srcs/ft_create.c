@@ -77,7 +77,9 @@ void	ft_create_forks(t_pipex *pipex, int argc, char **argv)
 		if (i >= 2)
 			reset_pipe(pipex, i);
 		pids[i] = fork();
-		if (pids[i] == 0)
+		if (pids[i] == -1)
+			ft_exit(pipex);
+		else if (pids[i] == 0)
 			ft_init_fd(pipex, argv, i, argc);
 		i++;
 	}
