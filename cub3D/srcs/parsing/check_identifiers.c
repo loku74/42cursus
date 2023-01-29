@@ -46,7 +46,7 @@ static t_exit	set_colors(t_data *data)
 	return (SUCCESS);
 }
 
-static t_exit	parse_rgb_colors(t_data *data, char *colors, int texture)
+static t_exit	parse_rgb(t_data *data, char *colors, int texture)
 {
 	char	**color_set;
 	int		i;
@@ -61,7 +61,7 @@ static t_exit	parse_rgb_colors(t_data *data, char *colors, int texture)
 	i = 0;
 	while (i < RGB_CONSTANT)
 	{
-		if (check_num(color_set[i]) OR len_split(color_set) != 3)
+		if (len_split(color_set) != 3 OR check_num(color_set[i]))
 		{
 			free_textures(data, N_TEXTURES, TRUE);
 			free_colors(data);
@@ -92,12 +92,11 @@ static t_exit	treat_identifiers(t_data *data)
 			if (data->textures[i] == NULL)
 			{
 				free_textures(data, i, TRUE);
-				free_colors(data);
 				return (r_error(IMG_ERROR));
 			}
 		}
-		else if (parse_rgb_colors(data, value, i - N_TEXTURES))
-			return (ERROR);
+		else if (check_rgb(value) OR parse_rgb(data, value, i - N_TEXTURES))
+			return (free_textures(data, N_TEXTURES, TRUE), ERROR);
 		i++;
 	}
 	return (SUCCESS);
@@ -120,6 +119,7 @@ t_exit	check_identifiers(t_data *data)
 	else if (treat_identifiers(data))
 	{
 		clear_dict(data->head);
+		free_colors(data);
 		return (ERROR);
 	}
 	return (SUCCESS);

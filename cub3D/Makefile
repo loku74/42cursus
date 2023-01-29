@@ -24,7 +24,7 @@ HEADER_DIR = ./includes/
 
 HEADER_NAMES = cub3D.h ft_macros.h
 
-HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
+HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = cc
@@ -72,7 +72,8 @@ UTILS_SRCS = ft_putstr_color_fd.c \
 				len.c \
 				dict.c \
 				strdup_no_nl.c\
-				check_num.c
+				check_num.c \
+				check_rgb.c
 UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 
 FREE_SRCS = free.c
@@ -82,7 +83,7 @@ ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES)
 OBJS = $(ALL_SRCS:.c=.o)
 
 # .c.o rule
-%.o: %.c Makefile $(HEADER) $(LIBFT)
+%.o: %.c Makefile $(HEADERS)
 	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"

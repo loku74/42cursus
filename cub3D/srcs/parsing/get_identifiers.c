@@ -12,33 +12,20 @@
 
 #include "../../includes/cub3D.h"
 
-void	print_dict(t_dict *head)
-{
-	int	i;
-
-	i = 0;
-	while (head != NULL)
-	{
-		printf("index: %d\n", i);
-		printf("key: %s\n", head->key);
-		printf("value: %s\n", head->value);
-		head = head->next;
-		i++;
-	}
-}
-
 static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 {
 	char	**line_split;
 	int		i;
 
 	i = 0;
+	while (*line == ' ')
+		line++;
 	while (i < N_IDENTIFIERS)
 	{
-		line_split = ft_split(line, ' ');
-		if (ft_strncmp(line, ids[i], ft_strlen(line_split[0])) == 0)
+		if (ft_strncmp(line, ids[i], ft_strlen(ids[i])) == 0)
 		{
-			if (len_split(line_split) != 2)
+			line_split = ft_split(line, ' ');
+			if (len_split(line_split) != ELEMENT_COUNT)
 				return (free_split(line_split), ERROR);
 			else if (get_value(data->head, line_split[0]) != NULL)
 				return (free_split(line_split), ERROR);
@@ -47,7 +34,6 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 			free_split(line_split);
 			return (SUCCESS);
 		}
-		free_split(line_split);
 		i++;
 	}
 	return (ERROR);
@@ -56,7 +42,7 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 t_exit	get_identifiers(t_data *data)
 {
 	char		*line;
-	static char	*ids[N_IDENTIFIERS] = {"NO", "SO", "WE", "EA", "F", "C"};
+	static char	*ids[N_IDENTIFIERS] = {"NO ", "SO ", "WE ", "EA ", "F ", "C "};
 
 	line = get_next_line(data->map_fd);
 	while (line)

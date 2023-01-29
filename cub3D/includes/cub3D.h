@@ -36,13 +36,22 @@
 # define R				0
 # define G				1
 # define B				2
+# define ELEMENT_COUNT	2
 # define RED			"\033[1;31m"
 # define YELLOW			"\033[1;33m"
 # define NC				"\033[0m"
+# define VALID_CHARS	"01 NSEW"
+# define PLAYER_SPAWN	"NSEW"
+# define FREE_SPACES	"NSEW0"
 # define MALLOC_ERROR	"Malloc Error"
 # define RGB_ERROR		"Invalid RGB input"
 # define IMG_ERROR		"Path to texture not valid or has the wrong extension"
 # define MISSING_IDS	"Some map identifiers are missing"
+# define MAP_MISSING	"Map not found"
+# define INVALID_MAP	"Map content cannot contain empty lines"
+# define INVALID_CHARS	"Map content contains invalid characters"
+# define SPAWN_COUNT_ER	"Map content has to contain (only) 1 player spawn"
+# define MAP_SURR_ER	"The map has to be surrounded by walls (1)"
 
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
@@ -61,6 +70,7 @@ struct s_data
 	void		*mlx_win;
 	void		**textures;
 	int			**colors;
+	char		**map;
 	int			img_width;
 	int			img_height;
 	int			map_fd;
@@ -93,6 +103,7 @@ int		len_split(char **split);
 int		len_dict(t_dict *dict);
 char	*strdup_no_nl(const char *str);
 t_exit	check_num(char *num);
+t_exit	check_rgb(char *rgb);
 
 // free functions
 void	free_textures(t_data *data, int k, t_bool destroy_img);

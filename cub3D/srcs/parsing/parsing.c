@@ -46,19 +46,30 @@ static t_exit	check_args_count(t_data *data, int argc)
 	return (SUCCESS);
 }
 
+static void	free_data(t_data *data, t_bool free_map)
+{
+	free_textures(data, N_TEXTURES, TRUE);
+	free_colors(data);
+	clear_dict(data->head);
+	if (free_map == TRUE AND data->map != NULL)
+		free_split(data->map);
+}
+
 t_exit	parsing(t_data *data, char **argv, int argc)
 {
 	if (check_args_count(data, argc))
 		return (ERROR);
-	if (check_file_format(data, argv[1]))
+	else if (check_file_format(data, argv[1]))
 		return (ERROR);
-	if (open_file(data, argv[1]))
+	else if (open_file(data, argv[1]))
 		return (ERROR);
-	if (get_identifiers(data))
+	else if (get_identifiers(data))
 		return (ERROR);
-	if (check_identifiers(data))
+	else if (check_identifiers(data))
 		return (ERROR);
-	if (check_map(data))
-		return (ERROR);
+	else if (get_map(data))
+		return (free_data(data, FALSE), ERROR);
+	else if (check_map(data))
+		return (free_data(data, TRUE), ERROR);
 	return (SUCCESS);
 }

@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 	free_textures(&data, N_TEXTURES, TRUE);
 	free_colors(&data);
 	clear_dict(data.head);
+	free_split(data.map);
 	return (SUCCESS);
 }
