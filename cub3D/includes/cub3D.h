@@ -22,6 +22,9 @@
 # include <string.h>
 # include <math.h> // to remove if unused
 
+# define WINDOW_NAME    "cub3D"
+# define WINDOW_X       1920
+# define WINDOW_Y       1080
 # define EXTENSION_LEN  4
 # define N_IDENTIFIERS	6
 # define N_TEXTURES		4
@@ -40,6 +43,10 @@
 # define RED			"\033[1;31m"
 # define YELLOW			"\033[1;33m"
 # define NC				"\033[0m"
+# define MLX_INIT_FAIL	"MLX init failed"
+# define MLX_WIN_FAIL	"MLX couldn't create a window"
+# define MLX_IMG_FAIL	"MLX couldn't create an image"
+# define MLX_GETAD_FAIL	"MLX couldn't get an image address"
 # define VALID_CHARS	"01 NSEW"
 # define PLAYER_SPAWN	"NSEW"
 # define FREE_SPACES	"NSEW0"
@@ -68,6 +75,11 @@ struct s_data
 	t_dict		*head;
 	void		*mlx;
 	void		*mlx_win;
+	void        *img;
+	char        *img_addr;
+	int         bits_per_pixel;
+	int         line_length;
+	int         endian;
 	void		**textures;
 	int			**colors;
 	char		**map;
@@ -109,5 +121,8 @@ t_exit	check_rgb(char *rgb);
 void	free_textures(t_data *data, int k, t_bool destroy_img);
 void	free_colors(t_data *data);
 void	free_split(char **str_split);
+
+// raycasting functions
+void	my_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

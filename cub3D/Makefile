@@ -54,6 +54,7 @@ SRCS_DIR = ./srcs/
 PARSING_DIR = $(addprefix $(SRCS_DIR), parsing/)
 UTILS_DIR = $(addprefix $(SRCS_DIR), utils/)
 FREE_DIR = $(addprefix $(SRCS_DIR), free/)
+RAYCASTING_DIR = $(addprefix $(SRCS_DIR), raycasting/)
 
 # SRCS Files
 MAIN_SRCS = cub3D.c
@@ -79,7 +80,10 @@ UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 FREE_SRCS = free.c
 FREE_FILES = $(addprefix $(FREE_DIR), $(FREE_SRCS))
 
-ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES)
+RAYCASTING_SRCS = my_pixel_put.c
+RAYCASTING_FILES = $(addprefix $(RAYCASTING_DIR), $(RAYCASTING_SRCS))
+
+ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES) $(RAYCASTING_FILES)
 OBJS = $(ALL_SRCS:.c=.o)
 
 # .c.o rule

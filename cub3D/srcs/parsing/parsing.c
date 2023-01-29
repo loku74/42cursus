@@ -57,6 +57,9 @@ static void	free_data(t_data *data, t_bool free_map)
 
 t_exit	parsing(t_data *data, char **argv, int argc)
 {
+	data->head = create_new_dict();
+	if (data->head == NULL)
+		return (r_error(MALLOC_ERROR));
 	if (check_args_count(data, argc))
 		return (ERROR);
 	else if (check_file_format(data, argv[1]))
@@ -71,5 +74,6 @@ t_exit	parsing(t_data *data, char **argv, int argc)
 		return (free_data(data, FALSE), ERROR);
 	else if (check_map(data))
 		return (free_data(data, TRUE), ERROR);
+	clear_dict(data->head);
 	return (SUCCESS);
 }
