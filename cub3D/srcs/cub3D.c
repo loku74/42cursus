@@ -26,24 +26,16 @@ static t_exit	set_mlx(t_data *data)
 	data->img_addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
 	if (data->img_addr == NULL)
 		return (r_error(MLX_GETAD_FAIL));
+	return (SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	for (int i = 0; i < WINDOW_X; i++)
-	{
-		for (int j = 0; j < WINDOW_Y; j++)
-			my_pixel_put(&data, i, j, 0x00424242);
-	}
-	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
-	mlx_loop(data.mlx);
-	printf("mlx pointer: %p\n", data.mlx);
-	printf("mlx window pointer: %p\n", data.mlx_win);
-	if (parsing(&data, argv, argc))
-		return (ERROR);
 	if (set_mlx(&data))
+		return (ERROR);
+	if (parsing(&data, argv, argc))
 		return (ERROR);
 	for (int i = 0; i < WINDOW_X; i++)
 	{
