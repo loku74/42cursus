@@ -6,7 +6,7 @@
 #    By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 14:44:35 by lbourniq          #+#    #+#              #
-#    Updated: 2023/01/24 15:35:47 by lbourniq         ###   ########lyon.fr    #
+#    Updated: 2023/01/28 15:09:15 by lbourniq         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER) #-fsanitize=address
 
 # MinilibX lib and flags
 MLX_DIR = ./mlx/
