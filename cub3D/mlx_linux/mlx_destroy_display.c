@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_pixel_put.c                                     :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 19:01:13 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/01/30 19:01:14 by lbourniq         ###   ########lyon.fr   */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "mlx_int.h"
 
-void	my_pixel_put(t_mlx *mlx, int x, int y, int color)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	char	*dst;
-
-	dst = mlx->img_addr + (y * mlx->line_length + x \
-	* (mlx->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	XCloseDisplay(xvar->display);
 }

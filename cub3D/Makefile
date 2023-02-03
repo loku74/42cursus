@@ -31,12 +31,17 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR)
 
 # MinilibX lib and flags
-MLX_DIR = ./mlx/
-MLX_LIB_NAME = libmlx.a
+UNAME_S = $(shell uname -s)
 
-MLX_LIB = $(addprefix $(MLX_DIR), $(MLX_LIB_NAME))
-
-MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+ifeq ($(UNAME_S), Linux)
+    MLX_DIR		=	./mlx_linux/
+    MLX_FLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+    MLX_CCFLAGS	=	-I/usr/include -Imlx_linux -O3
+else
+    MLX_DIR		=	./mlx/
+    MLX_FLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+    MLX_CCFLAGS	=	-Imlx
+endif
 
 # Other command(s) and flags
 RM = rm
@@ -72,15 +77,20 @@ UTILS_SRCS = ft_putstr_color_fd.c \
 				error.c \
 				len.c \
 				dict.c \
-				strdup_no_nl.c\
-				check_num.c \
-				check_rgb.c
+				strdup_no_nl.c \
+				check.c \
+				is_in.c \
+				get.c \
+				set.c
 UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 
 FREE_SRCS = free.c
 FREE_FILES = $(addprefix $(FREE_DIR), $(FREE_SRCS))
 
-RAYCASTING_SRCS = my_pixel_put.c
+RAYCASTING_SRCS = my_pixel_put.c \
+					2d.c \
+					player.c \
+					set_ray.c
 RAYCASTING_FILES = $(addprefix $(RAYCASTING_DIR), $(RAYCASTING_SRCS))
 
 ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES) $(RAYCASTING_FILES)
@@ -94,26 +104,26 @@ OBJS = $(ALL_SRCS:.c=.o)
 
 all: $(NAME)
 
-$(LIBFT):
+makelibft:
 	@make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
+makemlx:
 	@make -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLX_LIB) $(LIBFT) -o $(NAME)
+$(NAME): makelibft makemlx $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX_DIR)libmlx.a $(LIBFT) -o $(NAME)
 	@printf "${GREEN}-> cub3D executable compiled successfully${NC}\n"
 
 clean:
-	@make -C ./libft/. clean
-	@make -C ./mlx/. clean
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
 	@$(RM) $(RM_FLAGS) $(OBJS)
 	@printf "${PURPLE}-> All cub3D objs files removed successfully${NC}\n"
 
 
 fclean:
-	@make -C ./libft/ fclean
-	@make -C ./mlx/. fclean
+	@make -C $(LIBFT_DIR) fclean
+	@make -C $(MLX_DIR) clean
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
 	@printf "${PURPLE}-> All cub3D objs files and $(NAME) executable removed successfully${NC}\n"
 

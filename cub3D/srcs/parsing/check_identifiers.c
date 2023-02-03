@@ -75,7 +75,7 @@ static t_exit	parse_rgb(t_data *data, char *colors, int texture)
 	return (free_split(color_set), SUCCESS);
 }
 
-static t_exit	treat_identifiers(t_data *data)
+static t_exit	treat_identifiers(t_data *data, t_mlx *mlx)
 {
 	static char	*ids[N_IDENTIFIERS] = {"NO", "SO", "WE", "EA", "F", "C"};
 	char		*value;
@@ -87,8 +87,8 @@ static t_exit	treat_identifiers(t_data *data)
 		value = get_value(data->head, ids[i]);
 		if (i <= 3)
 		{
-			data->textures[i] = mlx_xpm_file_to_image(data->mlx, \
-			value, &data->img_width, &data->img_height);
+			data->textures[i] = mlx_xpm_file_to_image(mlx->mlx, \
+			value, &mlx->img_width, &mlx->img_height);
 			if (data->textures[i] == NULL)
 			{
 				free_textures(data, i, TRUE);
@@ -116,7 +116,7 @@ t_exit	check_identifiers(t_data *data)
 		free_colors(data);
 		return (r_error(MISSING_IDS));
 	}
-	else if (treat_identifiers(data))
+	else if (treat_identifiers(data, data->mlx))
 	{
 		clear_dict(data->head);
 		free_colors(data);

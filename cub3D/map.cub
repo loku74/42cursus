@@ -1,25 +1,18 @@
-EA ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
- WE ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+EA ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+ WE ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
 
    C 255,30,0000000000000000024
 
-       SO ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
-     NO ../so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+       SO ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+     NO ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
 
 F 220,100,0
 
-
-
-             111111111   1111111111111111     11
-            10000000001 1000000000000000011111001         1
-            1001000000111000000000000011111   11
-    1111111110110100011100000000000011
-    100000000011000001110111111111111
-11111111111111011100000010001
-11110111111111011101010010001
-11000000110101011100000010001
-100000000000000011000000100011
-1000000000000000110101001010001
-11000001110101011111011110N0111
-11110111 1110101 101111010001
-1 111111 1111111 111111111111
+1111111
+1010001
+1010N01
+1010001
+1000001
+1000101
+1000001
+1111111

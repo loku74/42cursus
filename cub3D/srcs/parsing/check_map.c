@@ -12,20 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-static t_bool	is_in(char c, char const *charset)
-{
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
 static t_exit	check_map_chars(t_data *data)
 {
 	int	i;

@@ -12,40 +12,67 @@
 
 #include "../includes/cub3D.h"
 
-static t_exit	set_mlx(t_data *data)
+static int	key_pressed(int key, t_player *player)
 {
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-		return (r_error(MLX_INIT_FAIL));
-	data->mlx_win = mlx_new_window(data->mlx, WINDOW_X, WINDOW_Y, WINDOW_NAME);
-	if (data->mlx_win == NULL)
-		return (r_error(MLX_WIN_FAIL));
-	data->img = mlx_new_image(data->mlx, WINDOW_X, WINDOW_Y);
-	if (data->img == NULL)
-		return (r_error(MLX_IMG_FAIL));
-	data->img_addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
-	if (data->img_addr == NULL)
-		return (r_error(MLX_GETAD_FAIL));
-	return (SUCCESS);
+	if (key == W)
+		player->forward = TRUE;
+	else if (key == A)
+		player->left = TRUE;
+	else if (key == S)
+		player->back = TRUE;
+	else if (key == D)
+		player->right = TRUE;
+	else if (key == LEFT)
+		player->move_fov_left = TRUE;
+	else if (key == RIGHT)
+		player->move_fov_right = TRUE;
+	return (0);
+}
+
+static int	key_released(int key, t_player *player)
+{
+	if (key == W)
+		player->forward = FALSE;
+	else if (key == A)
+		player->left = FALSE;
+	else if (key == S)
+		player->back = FALSE;
+	else if (key == D)
+		player->right = FALSE;
+	else if (key == LEFT)
+		player->move_fov_left = FALSE;
+	else if (key == RIGHT)
+		player->move_fov_right = FALSE;
+	return (0);
+}
+
+static int	render_next_frame(t_data *data)
+{
+	update_player(&data->player);
+	draw_2d(data, data->mlx);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_mlx	mlx;
 
-	if (set_mlx(&data))
-		return (ERROR);
+	data.mlx = &mlx;
+	mlx.mlx = mlx_init();
+	if (mlx.mlx == NULL)
+		return (r_error(MLX_INIT_FAIL));
 	if (parsing(&data, argv, argc))
 		return (ERROR);
-	for (int i = 0; i < WINDOW_X; i++)
-	{
-		for (int j = 0; j < WINDOW_Y; j++)
-			my_pixel_put(&data, i, j, 0x00424242);
-	}
-	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img, 0, 0);
-	mlx_loop(data.mlx);
-	printf("mlx pointer: %p\n", data.mlx);
-	printf("mlx window pointer: %p\n", data.mlx_win);
+	if (set_mlx(&data, &mlx))
+		return (ERROR);
+	set_player(&data, &data.player);
+	mlx_hook(mlx.win, 2, 1L << 0, key_pressed, &data.player);
+	mlx_hook(mlx.win, 3, 1L << 1, key_released, &data.player);
+	mlx_loop_hook(mlx.mlx, render_next_frame, &data);
+	mlx_loop(mlx.mlx);
+	printf("mlx pointer: %p\n", mlx.mlx);
+	printf("mlx window pointer: %p\n", mlx.win);
 	printf("ceiling R G B color: %d, %d, %d\n", data.colors[CEILING][R], data.colors[CEILING][G], data.colors[CEILING][B]);
 	printf("floor R G B color: %d, %d, %d\n", data.colors[FLOOR][R], data.colors[FLOOR][G], data.colors[FLOOR][B]);
 	printf("Address of EA mlx image: %p\n", data.textures[EA]);

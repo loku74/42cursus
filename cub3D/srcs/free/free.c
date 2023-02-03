@@ -20,7 +20,7 @@ void	free_textures(t_data *data, int k, t_bool destroy_img)
 	while (i < k)
 	{
 		if (destroy_img == TRUE)
-			mlx_destroy_image(data->mlx, data->textures[i]);
+			mlx_destroy_image(data->mlx->mlx, data->textures[i]);
 		i++;
 	}
 	free(data->textures);

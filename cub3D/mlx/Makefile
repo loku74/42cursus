@@ -1,8 +1,6 @@
 # Colors
 GREEN = \033[1;32m
 PURPLE = \033[1;35m
-CYAN = \033[1;36m
-YELLOW = \033[1;33m
 NC = \033[0m
 
 NOM=libmlx.a
@@ -16,32 +14,20 @@ CFLAGS+=-O2
 CFLAGS+= -DSTRINGPUTX11 -Wno-deprecated-declarations
 
 .c.o:
-	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "${GREEN} OK!${NC}\n"
-
+	@cc $(CFLAGS) -c $< -o $@
 
 .m.o:
-	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "${GREEN} OK!${NC}\n"
+	@cc $(CFLAGS) -c $< -o $@
 
 all: $(NOM)
 
 $(NOM):	$(OBJ)
 	@ar -rc $(NOM) $(OBJ)
 	@ranlib $(NOM)
-	@echo "${GREEN}-> MinilibX library compiled successfully${NC}"
+	@printf "${GREEN}-> MinilibX library compiled successfully${NC}\n"
 
 clean:
-	@rm -f $(OBJ) *~
-	@rm -f mlx_app
-	@printf "${PURPLE}-> All Minilibx objs files removed successfully${NC}\n"
-
-
-fclean:
 	@rm -f $(NOM) $(OBJ) *~
-	@printf "${PURPLE}-> All Minilibx objs files and $(NOM) library removed successfully${NC}\n"
-
+	@rm -f mlx_app
 
 re: clean all
