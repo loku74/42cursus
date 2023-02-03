@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbourniq <lbourniq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:28:52 by lbourniq          #+#    #+#             */
-/*   Updated: 2022/12/20 09:39:47 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:02:40 by lbourniq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,34 @@ static int	close_game(t_mlx *mlx)
 
 static int	key_pressed(int key, t_mlx *mlx)
 {
-	if (key == 2)
+	if (key == D)
 	{
 		mlx->left = 0;
 		mlx->idle = 0;
 		mlx->run_r = 1;
 	}
-	else if (key == 0)
+	else if (key == A)
 	{
 		mlx->left = 1;
 		mlx->idle = 0;
 		mlx->run_l = 1;
 	}
-	else if (key == 13 || key == 49)
+	else if (key == SPACE || key == UP || key == W)
 	{
 		mlx->jumping = 1;
 		mlx->curr_jumping = 1;
 		mlx->idle = 0;
 	}
-	else if (key == 1)
+	else if (key == S || key == DOWN)
 		mlx->jumping = 0;
-	else if (key == 53)
+	else if (key == ESC)
 		close_game(mlx);
 	return (0);
 }
 
 static int	key_released(int key, t_mlx *mlx)
 {
-	if (key == 2)
+	if (key == D)
 	{
 		mlx->run_r = 0;
 		if (mlx->run_l == 0 && mlx->jumping == 0 && mlx->falling == 0)
@@ -55,7 +55,7 @@ static int	key_released(int key, t_mlx *mlx)
 		else if (mlx->run_l == 1)
 			mlx->left = 1;
 	}
-	else if (key == 0)
+	else if (key == A)
 	{
 		mlx->run_l = 0;
 		if (mlx->run_r == 0 && mlx->jumping == 0 && mlx->falling == 0)
@@ -63,7 +63,7 @@ static int	key_released(int key, t_mlx *mlx)
 		else if (mlx->run_r == 1)
 			mlx->left = 0;
 	}
-	else if (key == 13 || key == 49)
+	else if (key == SPACE || key == UP || key == W)
 		mlx->curr_jumping = 0;
 	return (0);
 }

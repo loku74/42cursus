@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_base2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbourniq <lbourniq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:28:52 by lbourniq          #+#    #+#             */
-/*   Updated: 2022/11/29 15:52:35 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:22:02 by lbourniq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,11 @@ void	ft_get_index_base2(t_llist **node_a, int *tab, int length)
 {
 	t_llist	*node;
 	int		i;
-	int		num;
 
 	i = 0;
 	while (i < length)
 	{
 		node = *node_a;
-		num = tab[i];
 		while (tab[i] != node->num)
 			node = node->next;
 		node->index = ft_itoa_base2(i);

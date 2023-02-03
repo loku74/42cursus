@@ -128,7 +128,7 @@ $(NAME): $(LIBFT_OBJS_FILES) $(FT_PRINTF_OBJS_FILES) $(GNL_OBJS_FILES)
 								$(FT_PRINTF_OBJS_FILES) \
 								$(GNL_OBJS_FILES)
 	@$(RANLIB) $(NAME)
-	@echo "${GREEN}-> $(NAME) compiled successfully${NC}"
+	@printf "${GREEN}-> $(NAME) compiled successfully${NC}\n"
 
 %.o: %.c Makefile $(ALL_HEADERS)
 	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
@@ -139,13 +139,13 @@ clean:
 	@$(RM) $(RM_FLAGS) $(LIBFT_OBJS_FILES) \
 	$(FT_PRINTF_OBJS_FILES) \
 	$(GNL_OBJS_FILES)
-	@echo "${PURPLE}-> All libft objs files removed successfully${NC}"
+	@printf "${PURPLE}-> All libft objs files removed successfully${NC}\n"
 
 fclean:
 	@$(RM) $(RM_FLAGS) $(NAME) $(LIBFT_OBJS_FILES) \
 	$(FT_PRINTF_OBJS_FILES) \
 	$(GNL_OBJS_FILES)
-	@echo "${PURPLE}-> $(NAME) and objs files removed successfully${NC}"
+	@printf "${PURPLE}-> $(NAME) and objs files removed successfully${NC}\n"
 
 re: fclean all
 

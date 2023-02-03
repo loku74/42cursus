@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbourniq <lbourniq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:08:52 by lbourniq          #+#    #+#             */
-/*   Updated: 2022/12/20 09:31:36 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:59:16 by lbourniq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
+# include "../mlx_linux/mlx.h"
+# include "keycodes.h"
 # include <fcntl.h>
 # include <errno.h>
-# include <strings.h>
+# include <string.h>
 
 # define COUNTER_MAX 111111
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbourniq <lbourniq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 14:44:35 by lbourniq          #+#    #+#              #
-#    Updated: 2023/01/28 15:09:15 by lbourniq         ###   ########lyon.fr    #
+#    Updated: 2023/02/03 16:13:34 by lbourniq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,22 @@ HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-fsanitize=address
 
 # MinilibX lib and flags
-MLX_DIR = ./mlx/
-MLX_LIB_NAME = libmlx.a
 
-MLX_LIB = $(addprefix $(MLX_DIR), $(MLX_LIB_NAME))
+UNAME_S            :=    $(shell uname -s)
 
-MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+ifeq ($(UNAME_S), Linux)
+    MLX_DIR		=	./mlx_linux/
+    MLX_FLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+    MLX_CCFLAGS	=	-I/usr/include -Imlx_linux -O3
+else
+    MLX_DIR		=	./mlx/
+    MLX_FLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+    MLX_CCFLAGS	=	-Imlx
+endif
+
 
 # Other command(s) and flags
 RM = rm
@@ -112,29 +119,29 @@ OBJS = $(ALL_SRCS:.c=.o)
 
 # .c.o rule
 %.o: %.c Makefile $(HEADER) $(LIBFT)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLX_CCFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
+makemlx:
 	@make -C $(MLX_DIR)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLX_LIB) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) makemlx $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX_DIR)libmlx.a $(LIBFT) -o $(NAME)
 	@echo "${GREEN}-> so_long executable compiled successfully${NC}"
 
 clean:
-	@make -C ./libft/. clean
-	@make -C ./mlx/. clean
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
 	@$(RM) $(RM_FLAGS) $(OBJS)
 	@echo "${PURPLE}-> All so_long objs files and MinilibX objs files removed successfully${NC}"
 
 fclean:
-	@make -C ./libft/ fclean
-	@make -C ./mlx/. clean
+	@make -C $(LIBFT_DIR) fclean
+	@make -C $(MLX_DIR) clean
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
 	@echo "${PURPLE}-> All so_long objs files, MinilibX objs files and so_long executable removed successfully${NC}"
 

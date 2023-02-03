@@ -19,7 +19,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
+# include <stdint.h>
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 char	*get_next_line(int fd);
 

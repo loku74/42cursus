@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbourniq <lbourniq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:48:15 by lbourniq          #+#    #+#              #
-#    Updated: 2022/12/03 08:43:31 by lbourniq         ###   ########.fr        #
+#    Updated: 2023/02/03 16:21:33 by lbourniq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_HEADERS = $(addprefix $(LIBFT_INCLUDES_DIR), $(LIBFT_INCLUDES_FILES))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER)
+CFLAGS = -Wall -Wextra -Werror
 RM = rm
 RM_FLAGS = -rf
 

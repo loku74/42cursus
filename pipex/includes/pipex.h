@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/wait.h>
 
 # define IN 0
 # define OUT 1

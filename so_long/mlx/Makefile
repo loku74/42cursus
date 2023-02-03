@@ -24,7 +24,7 @@ all: $(NOM)
 $(NOM):	$(OBJ)
 	@ar -rc $(NOM) $(OBJ)
 	@ranlib $(NOM)
-	@echo "${GREEN}-> MinilibX library compiled successfully${NC}"
+	@printf "${GREEN}-> MinilibX library compiled successfully${NC}\n"
 
 clean:
 	@rm -f $(NOM) $(OBJ) *~

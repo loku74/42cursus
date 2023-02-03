@@ -19,6 +19,7 @@ void	check_rectangular_form(t_mlx *mlx)
 	int		k;
 
 	k = 0;
+	temp = 0;
 	while (mlx->map[k])
 	{
 		i = 0;

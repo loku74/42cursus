@@ -50,7 +50,7 @@ OBJS = $(SRCS:.c=.o)
 
 # .c.o rule (mandatory part)
 $(SRCS_DIR)%.o: $(SRCS_DIR)%.c Makefile $(HEADER) ./libft/libft.a
-	@$(CC) $(CFLAGS) -I$(HEADER) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 
 all: makelibft $(NAME)
 
