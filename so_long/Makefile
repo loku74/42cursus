@@ -42,6 +42,7 @@ else
     MLX_CCFLAGS	=	-Imlx
 endif
 
+MLX = $(addprefix $(MLX_DIR), libmlx.a)
 
 # Other command(s) and flags
 RM = rm
@@ -123,14 +124,14 @@ OBJS = $(ALL_SRCS:.c=.o)
 
 all: $(NAME)
 
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
+$(LIBFT): FORCE
+	@make $(LIBFT_NAME) -C $(LIBFT_DIR)
 
-makemlx:
-	@make -C $(MLX_DIR)
+$(MLX): FORCE
+	@make libmlx.a -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) makemlx $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX_DIR)libmlx.a $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX) $(LIBFT) -o $(NAME)
 	@echo "${GREEN}-> so_long executable compiled successfully${NC}"
 
 clean:
@@ -152,4 +153,5 @@ re:
 bonus:
 	@make $(NAME)
 
-.PHONY: all re fclean clean makelibft bonus  
+.PHONY: all re fclean clean bonus FORCE
+FORCE:
