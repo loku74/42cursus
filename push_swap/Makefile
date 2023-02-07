@@ -57,7 +57,7 @@ all: makelibft $(NAME)
 makelibft:
 	@make -C ./libft/.
 
-$(NAME): libft/libft.a $(OBJS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME)
 	@echo "${GREEN}-> push_swap executable compiled successfully${NC}"
 

@@ -57,7 +57,7 @@ all: makelibft $(NAME)
 makelibft:
 	@make -C ./libft/.
 
-$(NAME): makelibft $(OBJS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME)
 	@echo "${GREEN}-> pipex executable compiled successfully${NC}"
 
