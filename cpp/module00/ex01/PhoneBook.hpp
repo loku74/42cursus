@@ -10,4 +10,5 @@ public:
 
 private:
 	Contact contacts[8];
+	int		index = 0;
 };
