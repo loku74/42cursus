@@ -8,7 +8,10 @@ public:
 	PhoneBook();
 	~PhoneBook();
 
+	// index getter
+	int	getIndex(void);
+
 private:
 	Contact contacts[8];
-	int		index = 0;
+	int		index;
 };
