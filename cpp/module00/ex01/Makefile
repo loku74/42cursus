@@ -16,6 +16,7 @@ RM_FLAGS = -rf
 
 # SRCS Files and objs
 SRCS = PhoneBook.cpp \
+		Contact.cpp \
 		main.cpp
 OBJS = $(SRCS:.cpp=.o)
 

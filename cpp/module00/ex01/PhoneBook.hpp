@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include "Contact.hpp"
 
 class PhoneBook
 {
@@ -9,5 +9,5 @@ public:
 	~PhoneBook();
 
 private:
-
+	Contact contacts[8];
 };
