@@ -10,7 +10,7 @@ Contact::~Contact()
 
 }
 
-// getters
+// getter(s)
 std::string	Contact::getFirstName(void)						{ return first_name; }
 
 std::string	Contact::getLastName(void)						{ return last_name; }
@@ -21,7 +21,7 @@ std::string	Contact::getPhoneNumber(void) 					{ return phone_number; }
 
 std::string	Contact::getDarkestSecret(void)					{ return darkest_secret; }
 
-// setters
+// setter(s)
 void		Contact::setFirstName(std::string to_set)		{ first_name = to_set; }
 
 void		Contact::setLastName(std::string to_set)		{ last_name = to_set; }
