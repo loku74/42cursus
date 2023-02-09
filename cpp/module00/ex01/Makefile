@@ -13,6 +13,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98
 RM = rm
 RM_FLAGS = -rf
+MAKE_FLAGS = --no-print-directory
 
 # SRCS Files and objs
 SRCS = PhoneBook.cpp \
@@ -23,6 +24,9 @@ OBJS = $(SRCS:.cpp=.o)
 # .cpp .o rule
 %.o: %.cpp Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+all:
+	@make $(NAME) $(MAKE_FLAGS)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)

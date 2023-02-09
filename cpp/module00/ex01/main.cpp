@@ -1,12 +1,36 @@
 #include "PhoneBook.hpp"
-#include <iostream>
+#include <sstream>
 
 static bool	searchContact(PhoneBook &phoneBook)
 {
+	std::string	index;
+	int			result;
+
 	if (phoneBook.getContactCount() == 0)
 	{
-		std::cout << "No contact to display, try to insert some" << std::endl;
+		std::cout << "No contact to display, try to insert some." << std::endl;
 		return (true);
+	}
+	phoneBook.listContact();
+	std::cout << "Type the index to display all information about the contact: ";
+	while (true)
+	{
+		std::getline(std::cin, index);
+		if (std::cin.eof())
+			return (false);
+		if (index.length() == 1 && std::isdigit(index[0]))
+		{
+			std::stringstream(index) >> result;
+			if (result != 0 && result - 1 < phoneBook.getContactCount())
+			{
+				phoneBook.displayContact(result - 1);
+				return (true);
+			}
+			else
+				std::cout << "Wrong index, please try again: ";
+		}
+		else
+			std::cout << "Wrong index, please try again: ";
 	}
 }
 
@@ -82,8 +106,9 @@ int main(void)
 		{
 			if (!searchContact(phonebook))
 				return (1);
-
 		}
+		else if (command == "EXIT")
+			return (0);
 	}
 	return (0);
 }
