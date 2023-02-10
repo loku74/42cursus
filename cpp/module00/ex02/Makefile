@@ -1,4 +1,4 @@
-NAME = PhoneBook
+NAME = Account
 
 # Colors
 GREEN = \033[1;32m
@@ -18,9 +18,8 @@ RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory
 
 # SRCS Files and objs
-SRCS = PhoneBook.cpp \
-		Contact.cpp \
-		main.cpp
+SRCS = Account.cpp \
+		tests.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule

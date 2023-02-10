@@ -8,7 +8,7 @@ PhoneBook::PhoneBook(void)
 
 PhoneBook::~PhoneBook(void)
 {
-	std::cout << "All contacts have been lost forever..." << std::endl;
+	std::cout << std::endl << "All contacts have been lost forever..." << std::endl;
 }
 
 void	PhoneBook::addContact(std::string firstName,
@@ -39,7 +39,7 @@ static std::string	formatString(std::string str)
 void	PhoneBook::listContact(void)
 {
 	std::cout << "#----------#----------#----------#----------#" << std::endl;
-	std::cout << "|  index   |first name| last name| nickname |" << std::endl;
+	std::cout << "|   index  |first name| last name| nickname |" << std::endl;
 	std::cout << "#----------#----------#----------#----------#" << std::endl;
 	for (int i = 0; i < contactCount; i++)
 	{

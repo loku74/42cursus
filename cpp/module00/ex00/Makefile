@@ -3,6 +3,8 @@ NAME = megaphone
 # Colors
 GREEN = \033[1;32m
 PURPLE = \033[1;35m
+CYAN = \033[1;36m
+YELLOW = \033[1;33m
 NC = \033[0m
 
 # Headers
@@ -20,7 +22,9 @@ OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule
 %.o: %.cpp Makefile
+	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "${GREEN} OK!${NC}\n"
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
