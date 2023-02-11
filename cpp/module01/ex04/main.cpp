@@ -12,7 +12,7 @@ static int	open_files( std::fstream& input, std::ofstream& output, const std::st
 	output.open(filename + ".replace", std::ios::out | std::ios::trunc);
 	if (!output.is_open())
 	{
-		std::cerr << "Couldn't create output file" << std::endl;
+		std::cerr << "Couldn't open output file" << std::endl;
 		return (1);
 	}
 	return (0);
