@@ -7,6 +7,7 @@
 class PhoneBook
 {
 public:
+
 	PhoneBook(void);
 	~PhoneBook(void);
 
@@ -23,6 +24,7 @@ public:
 	int		getContactCount(void);
 
 private:
+
 	Contact contacts[8];
 	int		index;
 	int		contactCount;

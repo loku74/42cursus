@@ -13,10 +13,12 @@ public:
 
 	void	announce( void );
 
+	// setter(s)
+	void	setName( const std::string& name );
+
 private:
 
 	std::string	_name;
 };
 
-Zombie*	newZombie( std::string name );
-void	randomChump( std::string name );
+Zombie*	zombieHorde( int N, std::string name );

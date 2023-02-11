@@ -19,3 +19,7 @@ Zombie::~Zombie()
 {
 
 }
+
+// setter(s)
+
+void	Zombie::setName( const std::string& name ) { _name = name; }
