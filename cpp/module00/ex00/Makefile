@@ -15,6 +15,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98
 RM = rm
 RM_FLAGS = -rf
+MAKE_FLAGS = --no-print-directory
 
 # SRCS Files and objs
 SRCS = megaphone.cpp
@@ -25,6 +26,9 @@ OBJS = $(SRCS:.cpp=.o)
 	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"
+
+all:
+	@make $(NAME) $(MAKE_FLAGS)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)

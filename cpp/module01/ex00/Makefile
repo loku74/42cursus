@@ -1,4 +1,4 @@
-NAME = PhoneBook
+NAME = BrainZzz
 
 # Colors
 GREEN = \033[1;32m
@@ -9,21 +9,21 @@ NC = \033[0m
 
 # Headers
 HEADER_DIR = ./
-HEADER_NAMES = Contact.hpp \
-				PhoneBook.hpp
+HEADER_NAMES = Zombie.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98 #-fsanitize=address
 RM = rm
 RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory
 
 # SRCS Files and objs
-SRCS = PhoneBook.cpp \
-		Contact.cpp \
-		main.cpp
+SRCS = main.cpp \
+		Zombie.cpp \
+		newZombie.cpp \
+		randomChump.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule

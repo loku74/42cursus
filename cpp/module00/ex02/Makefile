@@ -8,8 +8,9 @@ YELLOW = \033[1;33m
 NC = \033[0m
 
 # Headers
-HEADER = .
-
+HEADER_DIR = ./
+HEADER_NAMES = Account.hpp
+HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 # Compiler and flags
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98
@@ -23,7 +24,7 @@ SRCS = Account.cpp \
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule
-%.o: %.cpp Makefile
+%.o: %.cpp Makefile $(HEADERS)
 	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"
