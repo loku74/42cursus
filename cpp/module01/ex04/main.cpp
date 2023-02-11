@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 
-int	open_files(std::fstream& input, std::ofstream& output, const std::string& filename)
+int	open_files( std::fstream& input, std::ofstream& output, const std::string& filename )
 {
 	input.open(filename);
 	if (!input.is_open())
@@ -18,7 +18,7 @@ int	open_files(std::fstream& input, std::ofstream& output, const std::string& fi
 	return (0);
 }
 
-int	main( int argc, char **argv)
+int	main( int argc, char **argv )
 {
 	std::fstream	input;
 	std::ofstream	output;
