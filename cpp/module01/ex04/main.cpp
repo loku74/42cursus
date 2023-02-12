@@ -43,7 +43,7 @@ int	main( int argc, char **argv )
 
 	if (argc != 4)
 	{
-		std::cerr << "Wrong number of arguments" << std::endl;
+		std::cerr << "Wrong number of argument(s): 3 required; file, string_to_replace, new_string." << std::endl;
 		return (1);
 	}
 

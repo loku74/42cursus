@@ -12,7 +12,7 @@ HEADER = .
 
 # Compiler and flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98 #-fsanitize=address
 RM = rm
 RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory

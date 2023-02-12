@@ -1,4 +1,4 @@
-NAME = replace
+NAME = Harl
 
 # Colors
 GREEN = \033[1;32m
@@ -9,7 +9,7 @@ NC = \033[0m
 
 # Headers
 HEADER_DIR = ./
-HEADER_NAMES =
+HEADER_NAMES = Harl.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
@@ -20,7 +20,8 @@ RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory
 
 # SRCS Files and objs
-SRCS = main.cpp
+SRCS = main.cpp \
+		Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule
