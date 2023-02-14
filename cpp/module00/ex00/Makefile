@@ -8,11 +8,11 @@ YELLOW = \033[1;33m
 NC = \033[0m
 
 # Headers
-HEADER = .
+HEADER_DIR = ./
 
 # Compiler and flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -std=c++98 #-fsanitize=address
 RM = rm
 RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory

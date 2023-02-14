@@ -16,7 +16,7 @@ HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -std=c++98 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -std=c++98 #-fsanitize=address
 RM = rm
 RM_FLAGS = -rf
 MAKE_FLAGS = --no-print-directory
