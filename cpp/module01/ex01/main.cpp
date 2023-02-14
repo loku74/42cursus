@@ -5,7 +5,7 @@ int	main( void )
 	Zombie	*horde;
 	int		hordeSize = 10;
 
-	horde = zombieHorde(hordeSize, "zombiedess");
+	horde = zombieHorde(hordeSize, "zombie");
 	if (horde == NULL)
 		return (1);
 

@@ -3,13 +3,13 @@
 
 static int	open_files( std::fstream& input, std::ofstream& output, const std::string& filename )
 {
-	input.open(filename);
+	input.open(filename.c_str());
 	if (!input.is_open())
 	{
 		std::cerr << "Couldn't open input file" << std::endl;
 		return (1);
 	}
-	output.open(filename + ".replace", std::ios::out | std::ios::trunc);
+	output.open((filename + ".replace").c_str(), std::ios::out | std::ios::trunc);
 	if (!output.is_open())
 	{
 		std::cerr << "Couldn't open output file" << std::endl;
@@ -32,7 +32,9 @@ static void	replace( std::fstream& input, std::ofstream& output, const std::stri
 			line.insert(index, s2);
 			index += s2.length();
 		}
-		output << line << std::endl;
+		output << line;
+		if (!input.eof())
+			output << std::endl;
 	}
 }
 
