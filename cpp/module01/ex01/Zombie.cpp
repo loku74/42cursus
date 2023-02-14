@@ -17,7 +17,7 @@ Zombie::Zombie ( const std::string& name ) : _name(name)
 
 Zombie::~Zombie()
 {
-	std::cout << _name << " deleted" << std::endl;
+
 }
 
 // setter(s)
