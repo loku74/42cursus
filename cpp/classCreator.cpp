@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 
-static void	create_src_file(std::ofstream& src_file, std::string& class_name)
+static void	create_src_file( std::ofstream & src_file, std::string & class_name )
 {
 	src_file << "#include \"" << class_name + ".hpp" << "\"\n\n";
 	src_file << class_name << "::" << class_name << "( void )\n";
@@ -16,7 +16,8 @@ static void	create_src_file(std::ofstream& src_file, std::string& class_name)
 	src_file << "\n\treturn (*this)\n}" << std::endl;
 }
 
-static void	create_header_file(std::ofstream& header_file, std::string& class_name)
+
+static void	create_header_file( std::ofstream & header_file, std::string & class_name )
 {
 	header_file << "#prama once\n\n" << "#include <iostream>\n\n";
 	header_file << "class " << class_name << "\n{\n\n";
@@ -28,7 +29,8 @@ static void	create_header_file(std::ofstream& header_file, std::string& class_na
 	header_file << "private:\n\n};" << std::endl;
 }
 
-static int	create_files(std::string& class_name, std::ofstream& class_header, std::ofstream& class_src)
+
+static int	create_files( std::string & class_name, std::ofstream & class_header, std::ofstream & class_src )
 {
 	class_header.open(class_name + ".hpp", std::ios::out | std::ios::trunc);
 	if (!class_header.is_open())
@@ -46,7 +48,8 @@ static int	create_files(std::string& class_name, std::ofstream& class_header, st
 	return (0);
 }
 
-int	main(int argc, char **argv)
+
+int	main( int argc, char **argv )
 {
 	std::ofstream	class_header;
 	std::ofstream	class_src;
