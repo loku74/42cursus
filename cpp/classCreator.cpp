@@ -87,14 +87,14 @@ int	main( int argc, char **argv )
 
 	for (int i = 0; i < class_names.size(); i++)
 	{
-		if (create_files(class_names[i], class_header, class_src))
-			return (3);
+		if (!create_files(class_names[i], class_header, class_src))
+		{
+			create_header_file(class_header, class_names[i], status);
+			create_src_file(class_src, class_names[i], status);
 
-		create_header_file(class_header, class_names[i], status);
-		create_src_file(class_src, class_names[i], status);
-
-		class_header.close();
-		class_src.close();
+			class_header.close();
+			class_src.close();
+		}
 	}
 
 	return (0);
