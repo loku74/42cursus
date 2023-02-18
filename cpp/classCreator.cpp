@@ -67,5 +67,8 @@ int	main( int argc, char **argv )
 	create_header_file(class_header, class_name);
 	create_src_file(class_src, class_name);
 
+	class_header.close();
+	class_src.close();
+
 	return (0);
 }
