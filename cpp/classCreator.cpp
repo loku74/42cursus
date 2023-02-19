@@ -24,7 +24,7 @@ static void	create_src_file( std::ofstream & src_file, std::string & class_name,
 }
 
 
-static void	create_header_file( std::ofstream & header_file, std::string & class_name, bool & status )
+static void	create_header_file( std::ofstream & header_file, std::string & class_name )
 {
 	header_file << "#pragma once\n\n" << "#include <iostream>\n\n";
 	header_file << "class " << class_name << "\n{\n\n";
@@ -42,14 +42,14 @@ static int	create_files( std::string & class_name, std::ofstream & class_header,
 	class_header.open(class_name + ".hpp", std::ios::out | std::ios::trunc);
 	if (!class_header.is_open())
 	{
-		std::cerr << "Couldn't create " << class_name << ".hpp file" << std::endl;
+		std::cerr << "Couldn't create " << class_name << ".hpp file." << std::endl;
 		return (1);
 	}
 	class_src.open(class_name + ".cpp", std::ios::out | std::ios::trunc);
 	if (!class_src.is_open())
 	{
 		class_header.close();
-		std::cerr << "Couldn't create " << class_name << ".cpp file" << std::endl;
+		std::cerr << "Couldn't create " << class_name << ".cpp file." << std::endl;
 		return (1);
 	}
 	return (0);
@@ -66,9 +66,10 @@ int	main( int argc, char **argv )
 
 	if (argc == 1)
 	{
-		std::cerr << "Error: no argument(s)" << std::endl;
+		std::cerr << "Error: no argument(s)." << std::endl;
 		return (1);
 	}
+
 	std::string	input;
 	for (int i = 1; argv[i]; i++)
 	{
@@ -81,7 +82,7 @@ int	main( int argc, char **argv )
 
 	if (class_names.size() == 0)
 	{
-		std::cerr << "Error: no file(s) to create" << std::endl;
+		std::cerr << "Error: no file(s) to create." << std::endl;
 		return (2);
 	}
 
@@ -89,7 +90,7 @@ int	main( int argc, char **argv )
 	{
 		if (!create_files(class_names[i], class_header, class_src))
 		{
-			create_header_file(class_header, class_names[i], status);
+			create_header_file(class_header, class_names[i]);
 			create_src_file(class_src, class_names[i], status);
 
 			class_header.close();
