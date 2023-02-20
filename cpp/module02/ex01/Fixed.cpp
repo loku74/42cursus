@@ -16,12 +16,13 @@ Fixed::Fixed( Fixed const & src )
 }
 
 
-Fixed::Fixed( const int num ) : _value(num << 8)
+Fixed::Fixed( const int num ) : _value(num << _fractBits)
 {
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed( const float num ) : _value( (int)roundf( num * (1 << 8) ) )
+
+Fixed::Fixed( const float num ) : _value( (int)roundf( num * (1 << _fractBits) ) )
 {
 	std::cout << "Float constructor called" << std::endl;
 }
