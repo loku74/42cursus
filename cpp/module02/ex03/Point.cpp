@@ -38,3 +38,10 @@ float	Point::getY( void ) const
 {
 	return (this->_y.toFloat());
 }
+
+
+std::ostream&	operator<<( std::ostream& stream, Point const & point )
+{
+	stream << "(" << point.getX() << ", " << point.getY() << ")";
+	return (stream);
+}

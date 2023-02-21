@@ -24,3 +24,5 @@ private:
 	Fixed const _y;
 
 };
+
+std::ostream&	operator<<( std::ostream& stream, Point const & point );
