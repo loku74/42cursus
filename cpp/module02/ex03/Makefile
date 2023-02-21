@@ -1,4 +1,4 @@
-NAME = Fixed
+NAME = bsp
 
 # Colors
 GREEN = \033[1;32m

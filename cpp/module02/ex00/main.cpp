@@ -16,7 +16,7 @@ int	main( void )
 
 	std::cout << b.getRawBits() << std::endl;
 
-	c = c;
+	c = b;
 
 	std::cout << c.getRawBits() << std::endl;
 
