@@ -6,7 +6,7 @@
 /*   By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 09:26:08 by lbourniq          #+#    #+#             */
-/*   Updated: 2022/11/25 18:00:59 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:18:50 by lbourniq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	**ft_strsplit(char **tab, char const *s, char *set)
 	j = 0;
 	while (i < ft_strlen(s))
 	{
-		if (next_c(&s[i], charset))
+		if (next_c(&s[i], set))
 		{
 			tab[j] = (char *)malloc(sizeof(char) * (next_c(&s[i], set) + 1));
 			if (!tab[j])
