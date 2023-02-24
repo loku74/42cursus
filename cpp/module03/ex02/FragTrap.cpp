@@ -1,40 +1,40 @@
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 
-FlagTrap::FlagTrap( void ) : ClapTrap()
+FragTrap::FragTrap( void ) : ClapTrap()
 {
 	_hitPoints = 100;
 	_energyPoints = 100;
 	_attackDamage = 30;
-	std::cout << YELLOW << "FlagTrap " << GREEN << _name << BLUE << " constructed !" << NC << std::endl;
+	std::cout << YELLOW << "FragTrap " << GREEN << _name << BLUE << " constructed !" << NC << std::endl;
 }
 
 
-FlagTrap::FlagTrap( const std::string& name ) : ClapTrap(name)
+FragTrap::FragTrap( const std::string& name ) : ClapTrap(name)
 {
 	_hitPoints = 100;
 	_energyPoints = 100;
 	_attackDamage = 30;
-	std::cout << YELLOW << "FlagTrap " << GREEN << _name << BLUE << " constructed !" << NC << std::endl;
+	std::cout << YELLOW << "FragTrap " << GREEN << _name << BLUE << " constructed !" << NC << std::endl;
 }
 
 
-FlagTrap::FlagTrap( FlagTrap const & src ) : ClapTrap()
+FragTrap::FragTrap( FragTrap const & src ) : ClapTrap()
 {
-	std::cout << GRAY << "FlagTrap copy constructor called." << NC << std::endl;
+	std::cout << GRAY << "FragTrap copy constructor called." << NC << std::endl;
 
 	*this = src;
 }
 
 
-FlagTrap::~FlagTrap( void )
+FragTrap::~FragTrap( void )
 {
-	std::cout << YELLOW << "FlagTrap " << GREEN << _name << RED << " destructed !" << NC << std::endl;
+	std::cout << YELLOW << "FragTrap " << GREEN << _name << RED << " destructed !" << NC << std::endl;
 }
 
 
-FlagTrap &	FlagTrap::operator=( FlagTrap const & rhs )
+FragTrap &	FragTrap::operator=( FragTrap const & rhs )
 {
-	std::cout << GRAY << "FlagTrap assignment operator called." << NC << std::endl;
+	std::cout << GRAY << "FragTrap assignment operator called." << NC << std::endl;
 	if (this != &rhs)
 	{
 		this->_name = rhs._name;
@@ -47,7 +47,7 @@ FlagTrap &	FlagTrap::operator=( FlagTrap const & rhs )
 }
 
 
-void	FlagTrap::attack(const std::string &target)
+void	FragTrap::attack(const std::string &target)
 {
 	if (_energyPoints > 0 && _hitPoints > 0)
 	{
@@ -61,12 +61,12 @@ void	FlagTrap::attack(const std::string &target)
 }
 
 
-void	FlagTrap::highFivesGuys( void )
+void	FragTrap::highFivesGuys( void )
 {
 	if (_hitPoints == 0)
 	{
 		std::cout << GREEN << _name << RED << " is dead !" << YELLOW << " He can't high fives anyone..." << NC << std::endl;
 		return ;
 	}
-	std::cout << YELLOW << "FlagTrap " << GREEN <<  _name << PURPLE << " is requesting for an high five !" << NC << std::endl;
+	std::cout << YELLOW << "FragTrap " << GREEN <<  _name << PURPLE << " is requesting for an high five !" << NC << std::endl;
 }

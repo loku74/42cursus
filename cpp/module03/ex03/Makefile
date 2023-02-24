@@ -1,4 +1,4 @@
-NAME = FragTrap
+NAME = DiamondTrap
 
 # Colors
 GREEN = \033[1;32m
@@ -11,7 +11,8 @@ NC = \033[0m
 HEADER_DIR = ./
 HEADER_NAMES = ClapTrap.hpp \
 				ScavTrap.hpp \
-				FragTrap.hpp
+				FragTrap.hpp \
+				DiamondTrap.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
@@ -25,7 +26,8 @@ MAKE_FLAGS = --no-print-directory
 SRCS = main.cpp \
 		ClapTrap.cpp \
 		ScavTrap.cpp \
-		FragTrap.cpp
+		FragTrap.cpp \
+		DiamondTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule
