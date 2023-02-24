@@ -29,7 +29,7 @@ ClapTrap::~ClapTrap( void )
 
 ClapTrap &	ClapTrap::operator=( ClapTrap const & rhs )
 {
-	std::cout << GRAY << "ClapTrap assignment constructor called" << NC << std::endl;
+	std::cout << GRAY << "ClapTrap assignment operator called" << NC << std::endl;
 
 	if (this != &rhs)
 	{
