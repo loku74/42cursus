@@ -19,7 +19,7 @@ static void	create_src_file( std::ofstream & src_file, std::string & class_name,
 	src_file << "\n}\n\n\n";
 	src_file << class_name << " &\t" << class_name << "::operator=( " << class_name << " const & rhs )\n{\n";
 	if (status)
-		src_file << "\t" << "std::cout << \"Copy assignment operator called\" << std::endl;\n\n";
+		src_file << "\t" << "std::cout << \"Assignment operator called\" << std::endl;\n\n";
 	src_file << "\treturn (*this);\n}" << std::endl;
 }
 
