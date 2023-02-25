@@ -14,7 +14,7 @@ public:
 
 	Brain &	operator=( Brain const & toAssign );
 
-protected:
+private:
 
 	std::string	ideas[100];
 

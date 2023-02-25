@@ -33,8 +33,8 @@ Dog &	Dog::operator=( Dog const & toAssign )
 
 	if (this != &toAssign)
 	{
-		type = toAssign.type;
-		_brain = new (std::nothrow) Brain(*_brain);
+		type = "Dog";
+		_brain = new (std::nothrow) Brain(*toAssign._brain);
 		if (_brain == NULL)
 			std::cout << RED << type << "was born without brain." << NC << std::endl;
 	}
