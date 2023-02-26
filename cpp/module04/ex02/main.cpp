@@ -41,6 +41,6 @@ int	main ( void )
 	std::cout << cat.getType() << " | " << catCopy.getType() << std::endl;
 	dog.makeSound(); dogCopy.makeSound();
 	cat.makeSound(); catCopy.makeSound();
-	
+
 	return (0);
 }
