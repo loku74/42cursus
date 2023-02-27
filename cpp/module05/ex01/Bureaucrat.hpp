@@ -1,8 +1,11 @@
 #pragma once
 
+#include "colors.h"
 #include <iostream>
 #include <stdexcept>
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -33,6 +36,8 @@ public:
 
 	void	gradeIncrement( void );
 	void	gradeDecrement( void );
+
+	void	signForm( Form& form );
 
 	// getter(s)
 

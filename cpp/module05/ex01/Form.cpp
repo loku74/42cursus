@@ -1,8 +1,11 @@
-#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form( std::string name, int const gradeToSign, int const gradeToExecute ) : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
-
+	if (_gradeToSign < 1 || _gradeToExecute < 1)
+		throw GradeTooHighException();
+	else if (_gradeToSign > 150 || _gradeToExecute > 150)
+		throw GradeTooLowException();
 }
 
 
@@ -50,4 +53,12 @@ std::ostream&	operator<<( std::ostream& stream, Form const & form )
 	stream << "Form grade to sign: " << form.getGradeToSign() << std::endl;
 	stream << "Form grade to execute: " << form.getGradeToExecute() << std::endl;
 	return (stream);
+}
+
+
+void	Form::beSigned( Bureaucrat& bureaucrat )
+{
+	if (_gradeToSign < bureaucrat.getGrade())
+		throw GradeTooLowException();
+	_isSigned = true;
 }

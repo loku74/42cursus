@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
-#include <stdexcept>
+#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -35,6 +36,8 @@ public:
 	bool				isSigned( void ) 			const;
 	int const &			getGradeToSign( void ) 		const;
 	int const &			getGradeToExecute( void ) 	const;
+
+	void	beSigned( Bureaucrat& bureaucrat );
 
 private:
 
