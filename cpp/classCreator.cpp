@@ -48,7 +48,7 @@ static void	create_src_file( std::ofstream & src_file, std::string & class_name,
 		src_file << "std::endl;";
 	}
 	src_file << "\n}\n\n\n";
-	src_file << class_name << " &\t" << class_name << "::operator=( " << class_name << " const & toAssign )\n{\n";
+	src_file << class_name << "&\t" << class_name << "::operator=( " << class_name << " const & toAssign )\n{\n";
 	if (status)
 	{
 		src_file << "\t" << "std::cout << ";
@@ -73,7 +73,7 @@ static void	create_header_file( std::ofstream & header_file, std::string & class
 	header_file << "\t" << class_name << "( void );\n";
 	header_file << "\t" << class_name << "( " << class_name << " const & toCopy );\n";
 	header_file << "\t~" << class_name << "( void );\n\n";
-	header_file << "\t" << class_name << " &\toperator=( " << class_name << " const & toAssign );\n\n";
+	header_file << "\t" << class_name << "&\toperator=( " << class_name << " const & toAssign );\n\n";
 	header_file << "private:\n\n};" << std::endl;
 }
 
