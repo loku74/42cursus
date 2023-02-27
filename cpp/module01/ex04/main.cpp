@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 
-static int	open_files( std::fstream& input, std::ofstream& output, const std::string& filename )
+static int	open_files( std::ifstream& input, std::ofstream& output, const std::string& filename )
 {
 	input.open(filename.c_str());
 	if (!input.is_open())
@@ -18,7 +18,7 @@ static int	open_files( std::fstream& input, std::ofstream& output, const std::st
 	return (0);
 }
 
-static void	replace( std::fstream& input, std::ofstream& output, const std::string& s1, const std::string& s2 )
+static void	replace( std::ifstream& input, std::ofstream& output, const std::string& s1, const std::string& s2 )
 {
 	std::string				line;
 	std::string::size_type 	index;
@@ -43,7 +43,7 @@ static void	replace( std::fstream& input, std::ofstream& output, const std::stri
 
 int	main( int argc, char **argv )
 {
-	std::fstream	input;
+	std::ifstream	input;
 	std::ofstream	output;
 
 	if (argc != 4)
