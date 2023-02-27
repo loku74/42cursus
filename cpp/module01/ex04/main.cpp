@@ -30,7 +30,10 @@ static void	replace( std::fstream& input, std::ofstream& output, const std::stri
 		{
 			line.erase(index, s1.length());
 			line.insert(index, s2);
-			index += s2.length();
+			if (s2.length() == 0)
+				index++;
+			else
+				index += s2.length();
 		}
 		output << line;
 		if (!input.eof())
