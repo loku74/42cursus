@@ -33,12 +33,6 @@ Animal &	Animal::operator=( Animal const & toAssign )
 }
 
 
-void	Animal::makeSound( void ) const
-{
-	std::cout << "*animal noises*" << std::endl;
-}
-
-
 std::string	Animal::getType( void ) const
 {
 	return (type);
