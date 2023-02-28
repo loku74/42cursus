@@ -1,0 +1,27 @@
+EA ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+ WE ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+
+   C 255,30,0000000000000000024
+
+       SO ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+     NO ../42cursus/so_long/Adventurer-xpm/fall_left/adventurer-fall_l_01.xpm
+
+F 220,100,0
+11111
+10S01
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+10001
+11111

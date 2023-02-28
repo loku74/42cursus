@@ -6,7 +6,7 @@
 /*   By: lbourniq <lbourniq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 09:26:08 by lbourniq          #+#    #+#             */
-/*   Updated: 2022/11/25 18:00:59 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:18:04 by lbourniq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,45 @@ static void	*free_all(char **tab, size_t nelem)
 	return (NULL);
 }
 
-static size_t	next_c(const char *str, char c)
+static size_t	next_c(const char *str, const char *charset)
 {
 	unsigned int	i;
+	unsigned int	k;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == c)
-			return (i);
+		k = 0;
+		while (charset[k])
+		{
+			if (str[i] == charset[k])
+				return (i);
+			k++;
+		}
 		i++;
 	}
 	return (i);
 }
 
-static unsigned int	count_words(char const *str, char c)
+static unsigned int	count_words(char const *str, char *charset)
 {
 	size_t			i;
 	unsigned int	count;
 
 	count = 1;
 	i = 0;
-	while (str[i] == c)
+	while (ft_is_in(str[i], charset))
 		i++;
 	if (i == ft_strlen(str))
 		return (count);
 	while (i < ft_strlen(str))
 	{
-		if (str[i] != c)
+		if (!ft_is_in(str[i], charset))
 		{
 			count++;
 			while (i < ft_strlen(str))
 			{
-				if (str[i] == c)
+				if (ft_is_in(str[i], charset))
 					break ;
 				i++;
 			}
@@ -65,7 +71,7 @@ static unsigned int	count_words(char const *str, char c)
 	return (count);
 }
 
-static char	**ft_strsplit(char **tab, char const *s, char c)
+static char	**ft_strsplit(char **tab, char const *s, char *set)
 {
 	size_t	i;
 	size_t	j;
@@ -75,13 +81,13 @@ static char	**ft_strsplit(char **tab, char const *s, char c)
 	j = 0;
 	while (i < ft_strlen(s))
 	{
-		if (next_c(&s[i], c))
+		if (next_c(&s[i], set))
 		{
-			tab[j] = (char *)malloc(sizeof(char) * (next_c(&s[i], c) + 1));
+			tab[j] = (char *)malloc(sizeof(char) * (next_c(&s[i], set) + 1));
 			if (!tab[j])
 				return (free_all(tab, j));
 			k = 0;
-			while (next_c(&s[i], c))
+			while (next_c(&s[i], set))
 				tab[j][k++] = s[i++];
 			tab[j++][k] = '\0';
 		}
@@ -91,14 +97,14 @@ static char	**ft_strsplit(char **tab, char const *s, char c)
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *charset)
 {
 	char			**tab;
 
 	if (!s)
 		return (NULL);
-	tab = (char **)malloc(sizeof(char *) * ((count_words(s, c))));
+	tab = (char **)malloc(sizeof(char *) * ((count_words(s, charset))));
 	if (!tab)
 		return (NULL);
-	return (ft_strsplit(tab, s, c));
+	return (ft_strsplit(tab, s, charset));
 }

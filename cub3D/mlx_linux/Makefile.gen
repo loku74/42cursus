@@ -11,10 +11,6 @@ INC=/usr/include
 
 ## Please use configure script
 
-# Colors
-GREEN = \033[1;32m
-PURPLE = \033[1;35m
-NC = \033[0m
 
 
 UNAME = $(shell uname)
@@ -46,13 +42,12 @@ all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ)
-	@ar -r $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@cp $(NAME) $(NAME_UNAME)
-	@printf "${GREEN}-> MinilibX library compiled successfully${NC}\n"
+	ar -r $(NAME) $(OBJ)
+	ranlib $(NAME)
+	cp $(NAME) $(NAME_UNAME)
 
 check: all
 	@test/run_tests.sh
@@ -65,7 +60,7 @@ show:
 	@printf "SRC		:\n	$(SRC)\n"
 	@printf "OBJ		:\n	$(OBJ)\n"
 
-clean:
-	@rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
+clean	:
+	rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
 
 .PHONY: all check show clean

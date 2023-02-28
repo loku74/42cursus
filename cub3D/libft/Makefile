@@ -92,7 +92,8 @@ FT_UTILS_FILES = ft_atoi.c\
 					ft_split.c\
 					ft_substr.c\
 					ft_tolower.c\
-					ft_toupper.c
+					ft_toupper.c\
+					ft_is_in.c
 FT_UTILS_SRCS = $(addprefix ft_utils/, $(FT_UTILS_FILES))
 
 LIBFT_ALL_SRCS_FILES = $(FT_IS_SRCS) $(FT_LST_SRCS) $(FT_MEM_SRCS) $(FT_PUT_SRCS) $(FT_STR_SRCS) $(FT_UTILS_SRCS)

@@ -34,7 +34,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-char	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char *charset);
 
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
@@ -42,6 +42,7 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isalnum(int c);
+int		ft_is_in(char c, char const *charset);
 int		ft_lstsize(t_list *lst);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

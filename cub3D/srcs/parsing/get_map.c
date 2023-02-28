@@ -46,7 +46,7 @@ t_exit	get_map(t_data *data)
 	}
 	if (line != NULL)
 		return (free(line), free(map), r_error(INVALID_MAP));
-	data->map = ft_split(map, '\n');
+	data->map = ft_split(map, "\n");
 	free(map);
 	return (SUCCESS);
 }

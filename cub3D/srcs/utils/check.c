@@ -78,3 +78,25 @@ t_exit	check_rgb(char *rgb)
 		return (r_error(RGB_ERROR));
 	return (SUCCESS);
 }
+
+t_exit	check_all(t_data *data, char **argv, int argc)
+{
+	if (set_walls(data))
+		return (ERROR);
+	if (parsing(data, argv, argc))
+	{
+		free_all(data);
+		return (ERROR);
+	}
+	if (set_mlx(data, data->mlx))
+	{
+		free_all(data);
+		return (ERROR);
+	}
+	if (init_imgs(data))
+	{
+		free_all(data);
+		return (ERROR);
+	}
+	return (SUCCESS);
+}

@@ -17,42 +17,30 @@ static t_exit	open_file(t_data *data, char *file)
 	data->map_fd = open(file, O_RDONLY);
 	if (data->map_fd == -1)
 	{
-		clear_dict(data->head);
 		print_file_error_message(file);
 		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
-static t_exit	check_file_format(t_data *data, char *file)
+static t_exit	check_file_format(char *file)
 {
 	if (ft_strrcmp(file, ".cub", EXTENSION_LEN) == FALSE)
 	{
 		print_file_format_error();
-		clear_dict(data->head);
 		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
-static t_exit	check_args_count(t_data *data, int argc)
+static t_exit	check_args_count(int argc)
 {
 	if (argc != 2)
 	{
 		print_args_error_message(argc);
-		clear_dict(data->head);
 		return (ERROR);
 	}
 	return (SUCCESS);
-}
-
-static void	free_data(t_data *data, t_bool free_map)
-{
-	free_textures(data, N_TEXTURES, TRUE);
-	free_colors(data);
-	clear_dict(data->head);
-	if (free_map == TRUE AND data->map != NULL)
-		free_split(data->map);
 }
 
 t_exit	parsing(t_data *data, char **argv, int argc)
@@ -60,9 +48,9 @@ t_exit	parsing(t_data *data, char **argv, int argc)
 	data->head = create_new_dict();
 	if (data->head == NULL)
 		return (r_error(MALLOC_ERROR));
-	if (check_args_count(data, argc))
+	if (check_args_count(argc))
 		return (ERROR);
-	else if (check_file_format(data, argv[1]))
+	else if (check_file_format(argv[1]))
 		return (ERROR);
 	else if (open_file(data, argv[1]))
 		return (ERROR);
@@ -71,9 +59,8 @@ t_exit	parsing(t_data *data, char **argv, int argc)
 	else if (check_identifiers(data))
 		return (ERROR);
 	else if (get_map(data))
-		return (free_data(data, FALSE), ERROR);
+		return (ERROR);
 	else if (check_map(data))
-		return (free_data(data, TRUE), ERROR);
-	clear_dict(data->head);
+		return (ERROR);
 	return (SUCCESS);
 }

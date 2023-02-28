@@ -24,19 +24,21 @@ static t_exit	parse_map_identifier(t_data *data, char *line, char **ids)
 	{
 		if (ft_strncmp(line, ids[i], ft_strlen(ids[i])) == 0)
 		{
-			line_split = ft_split(line, ' ');
+			line_split = ft_split(line, " \n");
+			if (line_split == NULL)
+				return (r_error(MALLOC_ERROR));
 			if (len_split(line_split) != ELEMENT_COUNT)
-				return (free_split(line_split), ERROR);
+				return (free_split(line_split), r_error(PARSING_ERROR));
 			else if (get_value(data->head, line_split[0]) != NULL)
-				return (free_split(line_split), ERROR);
+				return (free_split(line_split), r_error(PARSING_ERROR));
 			else if (add_dict(data->head, line_split[0], line_split[1]))
-				return (free_split(line_split), ERROR);
+				return (free_split(line_split), r_error(MALLOC_ERROR));
 			free_split(line_split);
 			return (SUCCESS);
 		}
 		i++;
 	}
-	return (ERROR);
+	return (r_error(PARSING_ERROR));
 }
 
 t_exit	get_identifiers(t_data *data)
@@ -51,9 +53,8 @@ t_exit	get_identifiers(t_data *data)
 		{
 			if (parse_map_identifier(data, line, ids))
 			{
-				clear_dict(data->head);
 				free(line);
-				return (r_error("Couldn't parse map identifiers"));
+				return (ERROR);
 			}
 		}
 		free(line);

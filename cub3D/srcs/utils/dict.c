@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dict.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ratinax <ratinax@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:25:08 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/01/25 16:25:09 by lbourniq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/09 16:35:20 by ratinax          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ t_exit	add_dict(t_dict *head, char *key_in, char *value_in)
 	char	*key;
 	char	*value;
 
-	key = strdup_no_nl(key_in);
+	key = ft_strdup(key_in);
 	if (key == NULL)
 		return (ERROR);
-	value = strdup_no_nl(value_in);
+	value = ft_strdup(value_in);
 	if (value == NULL)
-		return (ERROR);
+		return (free(key), ERROR);
 	if (head->key == NULL OR head->value == NULL)
 	{
 		head->key = key;
@@ -60,7 +60,7 @@ t_exit	add_dict(t_dict *head, char *key_in, char *value_in)
 		head = head->next;
 	head->next = create_new_dict();
 	if (head->next == NULL)
-		return (ERROR);
+		return (free(key), free(value), ERROR);
 	head->next->key = key;
 	head->next->value = value;
 	return (SUCCESS);
@@ -70,7 +70,8 @@ char	*get_value(t_dict *head, char *key)
 {
 	while (head)
 	{
-		if (head->key != NULL AND strncmp(head->key, key, ft_strlen(key)) == 0)
+		if (head->key != NULL AND ft_strncmp(head->key, key, \
+		ft_strlen(key)) == 0)
 			return (head->value);
 		head = head->next;
 	}

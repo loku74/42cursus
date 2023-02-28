@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:09:06 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/02/03 19:09:28 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:36:25 by tibernot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,32 @@ static void	update_angle(t_player *player)
 {
 	if (player->move_fov_left == TRUE)
 	{
-		player->angle -= ANGLE_SPEED;
-		if (player->angle < 0)
-			player->angle += 2 * PI;
-		player->dx = cos(player->angle);
-		player->dy = sin(player->angle);
+		player->angle -= (double)(ONE_DEGREE * ANGLE_SPEED);
+		if (player->angle < 0.0)
+			player->angle += (double)PI_2;
 	}
 	if (player->move_fov_right == TRUE)
 	{
-		player->angle += ANGLE_SPEED;
-		if (player->angle > 2 * PI)
-			player->angle -= 2 * PI;
-		player->dx = cos(player->angle);
-		player->dy = sin(player->angle);
+		player->angle += (double)(ONE_DEGREE * ANGLE_SPEED);
+		if (player->angle > (double)PI_2)
+			player->angle -= (double)PI_2;
 	}
 }
 
-static void	update_position(t_player *player)
+static void	update_player_position(t_player *player, t_data *data)
 {
 	if (player->forward == TRUE)
-	{
-		player->y += player->dy * PLAYER_SPEED;
-		player->x += player->dx * PLAYER_SPEED;
-	}
+		move_forward(player, data);
 	if (player->back == TRUE)
-	{
-		player->y -= player->dy * PLAYER_SPEED;
-		player->x -= player->dx * PLAYER_SPEED;
-	}
+		move_back(player, data);
 	if (player->right == TRUE)
-	{
-		player->y += player->dx * PLAYER_SPEED;
-		player->x -= player->dy * PLAYER_SPEED;
-	}
+		move_right(player, data);
 	if (player->left == TRUE)
-	{
-		player->y -= player->dx * PLAYER_SPEED;
-		player->x += player->dy * PLAYER_SPEED;
-	}
+		move_left(player, data);
 }
 
-void	update_player(t_player *player)
+void	update_player(t_player *player, t_data *data)
 {
 	update_angle(player);
-	update_position(player);
+	update_player_position(player, data);
 }

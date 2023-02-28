@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ILX_KEYCODES_H
-# define ILX_KEYCODES_H
+#ifndef KEYCODES_H
+# define KEYCODES_H
 
 # ifdef __gnu_linux__
 

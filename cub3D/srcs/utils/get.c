@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:10:05 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/02/03 19:10:06 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:09:13 by tibernot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,20 @@ int	get_map_height(t_data *data)
 	return (height);
 }
 
-double	get_y_nearest(t_player *player)
+double	get_y_nearest(t_player *player, t_ray *ray)
 {
-	double	y;
+	if (ray->angle < PI)
+		return ((int)player->y + 1);
+	else if (ray->angle > PI)
+		return ((int)player->y);
+	return (player->y);
+}
 
-	if (player->angle < PI)
-	{
-		y = ceil(player->y);
-		while ((int)y % SCALE != 0)
-			y++;
-	}
-	else
-	{
-		y = floor(player->y);
-		while ((int)y % SCALE != 0)
-			y--;
-	}
-	return (y);
+double	get_x_nearest(t_player *player, t_ray *ray)
+{
+	if (ray->angle > PI2 AND ray->angle < PI3)
+		return ((int)player->x);
+	else if (ray->angle < PI2 OR ray->angle > PI3)
+		return ((int)player->x + 1);
+	return (player->x);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:09:52 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/02/03 19:09:54 by lbourniq         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:54:42 by tibernot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,66 +16,50 @@ t_exit	set_mlx(t_data *data, t_mlx *mlx)
 {
 	mlx->img_width = get_map_width(data);
 	mlx->img_height = get_map_height(data);
-	mlx->win = mlx_new_window(mlx->mlx, mlx->img_width * SCALE, \
-	mlx->img_height * SCALE, WINDOW_NAME);
+	mlx->win = mlx_new_window(mlx->mlx, WINDOW_X, \
+	WINDOW_Y, WINDOW_NAME);
 	if (mlx->win == NULL)
 		return (r_error(MLX_WIN_FAIL));
-	mlx->img = mlx_new_image(mlx->mlx, mlx->img_width * SCALE, \
-	mlx->img_height * SCALE);
-	if (mlx->img == NULL)
-		return (r_error(MLX_IMG_FAIL));
-	mlx->img_addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
-	&mlx->line_length, &mlx->endian);
-	if (mlx->img_addr == NULL)
-		return (r_error(MLX_GETAD_FAIL));
+	data->floor_color = create_trgb(data->colors[FLOOR][B], \
+	data->colors[FLOOR][G], data->colors[FLOOR][R], 0);
+	data->ceiling_color = create_trgb(data->colors[CEILING][B], \
+	data->colors[CEILING][G], data->colors[CEILING][R], 0);
 	return (SUCCESS);
 }
 
-static void	set_player_coord(t_data *data, t_player *player)
+t_exit	set_walls(t_data *data)
 {
-	int	x;
-	int	y;
+	double	i;
+	double	window_half;
 
-	y = 0;
-	while (data->map[y])
+	data->walls = (t_wall *)malloc(sizeof(t_wall) * WINDOW_X);
+	data->angles = (double *)malloc(sizeof(double) * WINDOW_X);
+	if (data->walls == NULL OR data->angles == NULL)
 	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (is_in(data->map[y][x], PLAYER_SPAWN))
-			{
-				data->spawn = data->map[y][x];
-				player->x = (double)(x * SCALE + PLAYER_SCALE);
-				player->y = (double)(y * SCALE + PLAYER_SCALE);
-			}
-			x++;
-		}
-		y++;
+		free_all(data);
+		return (r_error(MALLOC_ERROR));
 	}
+	i = 0;
+	window_half = (double)WINDOW_X / 2;
+	while (i < WINDOW_X)
+	{
+		data->angles[(int)i] = atan((window_half - (i + 1)) / window_half);
+		i++;
+	}
+	return (SUCCESS);
 }
 
-static void	set_player_angle(t_data *data, t_player *player)
+void	set_all(t_data *data, t_mlx *mlx)
 {
-	if (data->spawn == 'N')
-		player->angle = 3 * PI / 2;
-	else if (data->spawn == 'E')
-		player->angle = (double)(2 * PI);
-	else if (data->spawn == 'W')
-		player->angle = PI;
-	else if (data->spawn == 'S')
-		player->angle = PI / 2;
-	player->dx = cos(player->angle);
-	player->dy = sin(player->angle);
-}
-
-void	set_player(t_data *data, t_player *player)
-{
-	player->right = FALSE;
-	player->left = FALSE;
-	player->forward = FALSE;
-	player->back = FALSE;
-	player->move_fov_left = FALSE;
-	player->move_fov_right = FALSE;
-	set_player_coord(data, player);
-	set_player_angle(data, player);
+	data->head = NULL;
+	data->mlx = NULL;
+	data->walls = NULL;
+	data->angles = NULL;
+	data->textures = NULL;
+	data->colors = NULL;
+	data->map = NULL;
+	mlx->mlx = NULL;
+	mlx->win = NULL;
+	data->img_walls = NULL;
+	data->img_background = NULL;
 }

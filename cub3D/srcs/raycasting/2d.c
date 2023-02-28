@@ -3,151 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   2d.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:24:16 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/01/30 17:24:17 by lbourniq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/14 14:34:37 by tibernot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static void	draw_background(t_mlx *mlx)
+static void	set_rays(t_ray *ray_h, t_ray *ray_v, t_player *player)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < mlx->img_height * SCALE)
-	{
-		x = 0;
-		while (x < mlx->img_width * SCALE)
-		{
-			my_pixel_put(mlx, x, y, 0x766C7F);
-			x++;
-		}
-		y++;
-	}
+	ray_h->mode = HORIZONTAL;
+	ray_v->mode = VERTICAL;
+	ray_h->angle = player->angle - (double)(45.00000 * (double)ONE_DEGREE);
+	if (ray_h->angle < 0)
+		ray_h->angle += (double)PI_2;
+	ray_v->angle = ray_h->angle;
 }
 
-static void	draw_map(t_data *data, t_mlx *mlx)
+static void	update_rays(t_ray *ray, t_data *data, int rays, t_player *player)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < mlx->img_height * SCALE)
-	{
-		x = 0;
-		while (x < mlx->img_width * SCALE && x < (int)ft_strlen(data->map[y / SCALE]) * SCALE)
-		{
-			if (y % SCALE > 1 AND x % SCALE > 1 AND data->map[y / SCALE][x / SCALE] == '1')
-				my_pixel_put(mlx, x, y, 0x153131);
-			else if (y % SCALE > 1 AND x % SCALE > 1 AND data->map[y / SCALE][x / SCALE] == '0')
-				my_pixel_put(mlx, x, y, 0xEABDA8);
-			else if (y % SCALE > 1 AND x % SCALE > 1 AND is_in(data->map[y / SCALE][x / SCALE], PLAYER_SPAWN))
-				my_pixel_put(mlx, x, y, 0x548C2F);
-			else if (y % SCALE > 1 AND x % SCALE > 1 AND data->map[y / SCALE][x / SCALE] == ' ')
-				my_pixel_put(mlx, x, y, 0xC2F8CB);
-			else
-				my_pixel_put(mlx, x, y, 0xFFFFFF);
-			x++;
-		}
-		y++;
-	}
+	ray->angle = player->angle - data->angles[rays] + 0.005;
+	if (ray->angle < 0)
+		ray->angle += (double)PI_2;
+	else if (ray->angle > (double)PI_2)
+		ray->angle -= (double)PI_2;
 }
 
-static void	draw_player(t_player player, t_mlx *mlx)
+static void	add_ray(t_data *data, t_ray *ray, double size, int rays)
 {
-	int	x;
-	int y;
-
-	y = 0;
-	while (y <= SCALE - PLAYER_SCALE * 2)
-	{
-		x = 0;
-		while (x <= SCALE - PLAYER_SCALE * 2)
-		{
-			my_pixel_put(mlx, player.x + x, player.y + y, 0xFFFF00);
-			x++;
-		}
-		y++;
-	}
+	data->walls[rays].angle = ray->angle;
+	data->walls[rays].size = size;
+	data->walls[rays].x = ray->x;
+	data->walls[rays].y = ray->y;
+	data->walls[rays].orientation = ray->mode;
 }
 
-static void	draw_ray(t_mlx *mlx, t_ray *ray)
+static void	create_walls(t_data *data, t_player *player)
 {
-	int x;
-	int y;
-
-	if (ray->x < 0 OR ray->y < 0)
-		return ;
-	if (ray->x > mlx->img_width * SCALE OR ray->y > mlx->img_height * SCALE) {
-		return ;
-	}
-	x = 0;
-	y = 0;
-	while (y < 14)
-	{
-		while (x < 14)
-		{
-			my_pixel_put(mlx, ray->x + y ,ray->y + x, 0xFF0000);
-			x++;
-		}
-		y++;
-	}
-}
-
-static void	draw_ray_angle(t_data *data, t_mlx *mlx, t_player *player)
-{
-	double 	x;
-	double	y;
-	int 	index;
-	int 	rays;
-	t_ray	ray;
+	int		rays;
+	t_ray	ray_h;
+	t_ray	ray_v;
+	double	dist_h;
+	double	dist_v;
 
 	rays = 0;
-	ray.angle = player->angle;
-	index = 0;
-	while (rays < 1)
+	set_rays(&ray_h, &ray_v, player);
+	while (rays < WINDOW_X)
 	{
-		if (set_horizontal_ray(&ray, player))
-		{
-			while (index < mlx->img_width)
-			{
-				x = ray.x / SCALE;
-				y = ray.y / SCALE;
-				if (y >= 0 AND x >= 0 AND y < mlx->img_height AND x < mlx->img_width)
-				{
-					printf("x: %f\n", x);
-					printf("y: %f\n", y);
-					if (data->map[(int)y][(int)x] == '1')
-						break;
-					else
-					{
-						ray.x += ray.xo;
-						ray.y += ray.yo;
-					}
-				}
-				index++;
-			}
-		}
+		dist_h = MAX_RAY_LEN;
+		dist_v = MAX_RAY_LEN;
+		set_vertical_ray(&ray_v, player);
+		dist_v = get_ray_dist(&ray_v, data, player, data->mlx);
+		set_horizontal_ray(&ray_h, player);
+		dist_h = get_ray_dist(&ray_h, data, player, data->mlx);
+		if (dist_v <= dist_h)
+			add_ray(data, &ray_v, dist_v, rays);
+		else
+			add_ray(data, &ray_h, dist_h, rays);
+		update_rays(&ray_h, data, rays, player);
 		rays++;
+		ray_v.angle = ray_h.angle;
 	}
-	printf("ray x: %f\n", ray.x);
-	printf("ray y: %f\n", ray.y);
-	draw_ray(mlx, &ray);
 }
 
-void	draw_2d(t_data *data, t_mlx *mlx)
+void	raycasting(t_data *data)
 {
-	mlx_clear_window(mlx->mlx, mlx->win);
-	draw_background(mlx);
-	draw_map(data, mlx);
-	draw_player(data->player, mlx);
-	draw_ray_angle(data, data->mlx, &data->player);
-	printf("player x: %f\n", data->player.x);
-	printf("player y: %f\n", data->player.y);
-	printf("player angle: %f\n", data->player.angle);
-	mlx_put_image_to_window(mlx->mlx, mlx->win,mlx->img, 0, 0);
+	create_walls(data, &data->player);
 }

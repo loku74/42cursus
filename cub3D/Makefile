@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbourniq <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:49:28 by lbourniq          #+#    #+#              #
-#    Updated: 2023/01/24 09:49:30 by lbourniq         ###   ########lyon.fr    #
+#    Updated: 2023/02/28 16:35:00 by lbourniq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,26 +22,28 @@ NC = \033[0m
 # Header(s)
 HEADER_DIR = ./includes/
 
-HEADER_NAMES = cub3D.h ft_macros.h
+HEADER_NAMES = cub3D.h ft_macros.h keycodes.h
 
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-Ofast
+MAKE_FLAG = --no-print-directory
 
 # MinilibX lib and flags
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S), Linux)
     MLX_DIR		=	./mlx_linux/
-    MLX_FLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-    MLX_CCFLAGS	=	-I/usr/include -Imlx_linux -O3
+    MLX_FLAGS	=	-Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm
 else
-    MLX_DIR		=	./mlx/
-    MLX_FLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-    MLX_CCFLAGS	=	-Imlx
+    MLX_DIR		=	./mlx_mac/
+    MLX_FLAGS	=	-Lmlx_mac -framework OpenGL -framework AppKit
 endif
+
+MLX_NAME = libmlx.a
+MLX_LIB = $(addprefix $(MLX_DIR), $(MLX_NAME))
 
 # Other command(s) and flags
 RM = rm
@@ -51,7 +53,7 @@ RM_FLAGS = -rf
 LIBFT_DIR = ./libft/
 LIBFT_NAME = libft.a
 
-LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
+LIBFT_LIB = $(addprefix $(LIBFT_DIR), $(LIBFT_NAME))
 
 # SRCS Directories
 SRCS_DIR = ./srcs/
@@ -60,6 +62,7 @@ PARSING_DIR = $(addprefix $(SRCS_DIR), parsing/)
 UTILS_DIR = $(addprefix $(SRCS_DIR), utils/)
 FREE_DIR = $(addprefix $(SRCS_DIR), free/)
 RAYCASTING_DIR = $(addprefix $(SRCS_DIR), raycasting/)
+PUT_GAME_DIR = $(addprefix $(SRCS_DIR), put_game/)
 
 # SRCS Files
 MAIN_SRCS = cub3D.c
@@ -77,23 +80,34 @@ UTILS_SRCS = ft_putstr_color_fd.c \
 				error.c \
 				len.c \
 				dict.c \
-				strdup_no_nl.c \
 				check.c \
 				is_in.c \
 				get.c \
 				set.c
 UTILS_FILES = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 
-FREE_SRCS = free.c
+FREE_SRCS = free.c \
+			destroy_mlx.c \
+			destroy_imgs.c
 FREE_FILES = $(addprefix $(FREE_DIR), $(FREE_SRCS))
 
-RAYCASTING_SRCS = my_pixel_put.c \
-					2d.c \
+RAYCASTING_SRCS = 	2d.c \
 					player.c \
-					set_ray.c
+					set_ray.c \
+					move.c \
+					raycasting.c \
+					set_player.c
 RAYCASTING_FILES = $(addprefix $(RAYCASTING_DIR), $(RAYCASTING_SRCS))
 
-ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES) $(RAYCASTING_FILES)
+PUT_GAME_SRCS = my_pixel_put.c \
+				init_imgs.c \
+				put_walls.c \
+				create_trgb.c \
+				put_background.c \
+				get_thing_to_put.c
+PUT_GAME_FILES = $(addprefix $(PUT_GAME_DIR), $(PUT_GAME_SRCS))
+
+ALL_SRCS = $(MAIN_FILE) $(PARSING_FILES) $(UTILS_FILES) $(FREE_FILES) $(RAYCASTING_FILES) $(PUT_GAME_FILES)
 OBJS = $(ALL_SRCS:.c=.o)
 
 # .c.o rule
@@ -102,33 +116,32 @@ OBJS = $(ALL_SRCS:.c=.o)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"
 
-all: $(NAME)
+all: makelibft makemlx
+	@make $(NAME) $(MAKE_FLAG)
 
 makelibft:
-	@make -C $(LIBFT_DIR)
+	@make $(LIBFT_NAME) -C $(LIBFT_DIR) $(MAKE_FLAG)
 
 makemlx:
-	@make -C $(MLX_DIR)
+	@make -C $(MLX_DIR) $(MAKE_FLAG)
 
-$(NAME): makelibft makemlx $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX_DIR)libmlx.a $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB)
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
 	@printf "${GREEN}-> cub3D executable compiled successfully${NC}\n"
 
 clean:
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(MLX_DIR) clean
+	@make -C $(LIBFT_DIR) clean $(MAKE_FLAG)
+	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS)
 	@printf "${PURPLE}-> All cub3D objs files removed successfully${NC}\n"
 
 
 fclean:
-	@make -C $(LIBFT_DIR) fclean
-	@make -C $(MLX_DIR) clean
+	@make -C $(LIBFT_DIR) fclean $(MAKE_FLAG)
+	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
 	@printf "${PURPLE}-> All cub3D objs files and $(NAME) executable removed successfully${NC}\n"
 
-re:
-	@make fclean
-	@make $(NAME)
+re: fclean all
 
-.PHONY: all re fclean clean makelibft
+.PHONY: all re fclean clean makelibft makemlx
