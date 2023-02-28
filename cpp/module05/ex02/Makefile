@@ -1,4 +1,4 @@
-NAME = Form
+NAME = Forms
 
 # Colors
 GREEN = \033[1;32m
@@ -11,7 +11,10 @@ NC = \033[0m
 HEADER_DIR = ./
 HEADER_NAMES = colors.h \
 				Bureaucrat.hpp \
-				Form.hpp
+				Form.hpp \
+				ShrubberyCreationForm.hpp \
+				RobotomyRequestForm.hpp \
+				PresidentialPardonForm.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
@@ -24,7 +27,10 @@ MAKE_FLAGS = --no-print-directory
 # SRCS Files and objs
 SRCS = main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		Form.cpp \
+		ShrubberyCreationForm.cpp \
+        RobotomyRequestForm.cpp \
+        PresidentialPardonForm.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # .cpp .o rule
