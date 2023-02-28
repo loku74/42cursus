@@ -127,20 +127,20 @@ makemlx:
 
 $(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
-	@printf "${GREEN}-> cub3D executable compiled successfully${NC}\n"
+	@printf "${GREEN}-> $(NAME) executable compiled successfully${NC}\n"
 
 clean:
 	@make -C $(LIBFT_DIR) clean $(MAKE_FLAG)
 	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS)
-	@printf "${PURPLE}-> All cub3D objs files removed successfully${NC}\n"
+	@printf "${PURPLE}-> All $(NAME) objs files removed successfully${NC}\n"
 
 
 fclean:
 	@make -C $(LIBFT_DIR) fclean $(MAKE_FLAG)
 	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
-	@printf "${PURPLE}-> All cub3D objs files and $(NAME) executable removed successfully${NC}\n"
+	@printf "${PURPLE}-> All $(NAME) objs files and $(NAME) executable removed successfully${NC}\n"
 
 re: fclean all
 
