@@ -33,32 +33,3 @@ void	put_background(t_data *d, int lineH, int up_of_line, int x)
 		i++;
 	}
 }
-
-void	put_ceiling(t_data *d, int up_of_line, int x)
-{
-	int	i;
-	int	coo;
-
-	i = 0;
-	coo = x * d->img_background->bits_per_pixel;
-	while (i < up_of_line)
-	{
-		coo += d->img_background->line_length;
-		i++;
-	}
-}
-
-void	put_floor(t_data *d, int lineH, int up_of_line, int x)
-{
-	int	i;
-	int	coo;
-
-	i = 0;
-	coo = x * d->img_background->bits_per_pixel
-		+ ((up_of_line + lineH) * d->img_background->line_length);
-	while (i + up_of_line + lineH < WINDOW_Y)
-	{
-		coo += d->img_background->line_length;
-		i++;
-	}
-}
