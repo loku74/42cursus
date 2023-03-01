@@ -11,7 +11,7 @@ int	main ( void )
 	std::cout << dog->getType() << std::endl;
 	std::cout << cat->getType() << std::endl;
 
-	dog->makeSound(); //will output the cat sound!
+	dog->makeSound();
 	cat->makeSound();
 	animal->makeSound();
 

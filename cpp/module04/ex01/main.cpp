@@ -28,8 +28,7 @@ int	main ( void )
 	Cat cat;
 	Cat catCopy;
 
-	dog = dogCopy;
-	cat = catCopy;
+	catCopy = cat;
 
 	std::cout << "dog brain adress: " << dog.getBrain() << std::endl;
 	std::cout << "dogCopy brain adress: " << dogCopy.getBrain() << std::endl;

@@ -13,7 +13,7 @@ public:
 
 	PresidentialPardonForm&	operator=( PresidentialPardonForm const & toAssign );
 
-	void	execute( Bureaucrat const & executor) const ;
+	void	execute( Bureaucrat const & executor ) const ;
 
 private:
 

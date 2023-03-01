@@ -15,7 +15,7 @@ public:
 
 	RobotomyRequestForm&	operator=( RobotomyRequestForm const & toAssign );
 
-	void	execute( Bureaucrat const & executor) const;
+	void	execute( Bureaucrat const & executor ) const;
 
 private:
 

@@ -13,7 +13,7 @@ public:
 
 	ShrubberyCreationForm&	operator=( ShrubberyCreationForm const & toAssign );
 
-	void	execute( Bureaucrat const & executor) const;
+	void	execute( Bureaucrat const & executor ) const;
 
 private:
 

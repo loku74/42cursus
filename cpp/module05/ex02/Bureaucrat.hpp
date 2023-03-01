@@ -37,7 +37,8 @@ public:
 	void	gradeIncrement( void );
 	void	gradeDecrement( void );
 
-	void	signForm( Form& form );
+	void	signForm( Form& form ) const;
+	void	executeForm( Form const & form ) const;
 
 	// getter(s)
 

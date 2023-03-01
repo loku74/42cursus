@@ -6,7 +6,7 @@ RobotomyRequestForm::RobotomyRequestForm( std::string const target ) : Form("Rob
 }
 
 
-RobotomyRequestForm::RobotomyRequestForm( RobotomyRequestForm const & toCopy )
+RobotomyRequestForm::RobotomyRequestForm( RobotomyRequestForm const & toCopy ) : Form(toCopy.getName(), toCopy.getGradeToSign(), toCopy.getGradeToExecute())
 {
 	*this = toCopy;
 }
@@ -23,7 +23,7 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=( RobotomyRequestForm const &
 	if (this != &toAssign)
 	{
 		Form::operator=(toAssign);
-		_target = toAssign._target
+		_target = toAssign._target;
 	}
 	return (*this);
 }
@@ -33,13 +33,13 @@ void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
 	if (!isSigned())
 	{
-		std::cerr << RED << "Form is not signed: cannot be executed." << NC << std::endl;
-		return ;
+		throw FormNotSignedException();
 	}
 
 	if (executor.getGrade() > getGradeToExecute())
 		throw GradeTooLowException();
-	else if (rand() % 2)
+
+	if (rand() % 2)
 		std::cout << GREEN << _target << " has been robotomized successfully." << NC << std::endl;
 	else
 		std::cout << RED << "Robotomy failed." << NC << std::endl;

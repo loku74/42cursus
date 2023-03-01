@@ -25,6 +25,14 @@ public:
 		}
 	};
 
+	class FormNotSignedException: public std::exception
+	{
+		virtual const char* what( void ) const throw()
+		{
+			return ("Form not signed");
+		}
+	};
+
 	Form( std::string name, int const gradeToSign, int const gradeToExecute );
 	Form( Form const & toCopy );
 	~Form( void );
@@ -37,8 +45,8 @@ public:
 	int const &			getGradeToSign( void ) 		const;
 	int const &			getGradeToExecute( void ) 	const;
 
-	void	beSigned( Bureaucrat const & bureaucrat );
-	void	execute( Bureaucrat const & executor) const = 0;
+	void			beSigned( Bureaucrat const & bureaucrat );
+	virtual void	execute( Bureaucrat const & executor ) const = 0;
 
 private:
 

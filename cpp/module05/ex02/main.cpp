@@ -1,79 +1,253 @@
-#include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int	main( void )
 {
-	std::cout << ORANGE << "- TEST 1 -" << NC << std::endl;
+	std::cout << ORANGE << "--- TEST 1: RobotomyRequestForm ---" << NC << std::endl;
 	{
-		Bureaucrat	pascal("Pascal", 42);
-		Form		form("le rachat de twitter", 42, 42);
+		RobotomyRequestForm form("target");
+		Bureaucrat			pascal("Pascal", 1);
+		Bureaucrat			pascal_mais_nul("Pascal_mais_nul", 150);
 
-		std::cout << pascal << form;
 
-		form.beSigned(pascal); // works but do not print anything
-		pascal.signForm(form); // works too and print something
+		std::cout << PURPLE << "-> Trying to execute when the form is not signed:" << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
 
-		std::cout << form;
+
+		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
+		std::cout << "Pascal tries to sign: ";
+		pascal.signForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.signForm(form);
+		try
+		{
+			std::cout << "Form trying to be signed by Pascal: ";
+			form.beSigned(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
+			form.beSigned(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+
+
+		std::cout << PURPLE << "-> Trying to execute: " << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
 	}
 
-	std::cout << ORANGE << "- TEST 2 -" << NC << std::endl;
+	std::cout << ORANGE << "--- TEST 2: ShrubberyCreationForm ---" << NC << std::endl;
 	{
-		Bureaucrat	pascal("Pascal", 43);
-		Form		form("le rachat de twitter", 42, 42);
+		ShrubberyCreationForm	form("target");
+		Bureaucrat				pascal("pascal", 1);
+		Bureaucrat				pascal_mais_nul("pascal_mais_nul", 150);
 
-		std::cout << pascal << form;
 
+		std::cout << PURPLE << "-> Trying to execute when the form is not signed:" << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
 		try
 		{
-			form.beSigned(pascal); // doesn't work
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
 		}
-		catch (std::exception& e)
+		catch (std::exception const & e)
 		{
-			std::cerr << RED << e.what() << NC << std::endl; // will print the error message
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
 		}
 
-		pascal.signForm(form); // doesn't work too
-		std::cout << form;
+
+		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
+		std::cout << "Pascal tries to sign: ";
+		pascal.signForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.signForm(form);
+		try
+		{
+			std::cout << "Form trying to be signed by Pascal: ";
+			form.beSigned(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
+			form.beSigned(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+
+
+		std::cout << PURPLE << "-> Trying to execute: " << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
 	}
 
-	std::cout << ORANGE << "- TEST 3-" << NC << std::endl;
+	std::cout << ORANGE << "--- TEST 3: PresidentialPardonForm ---" << NC << std::endl;
 	{
-		// all Forms instantiation will crash
+		PresidentialPardonForm	form("target");
+		Bureaucrat				pascal("pascal", 1);
+		Bureaucrat				pascal_mais_nul("pascal_mais_nul", 150);
+
+
+		std::cout << PURPLE << "-> Trying to execute when the form is not signed:" << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
 		try
 		{
-			Form	form("le rachat de twitter", 420, 42);
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
 		}
-		catch (std::exception& e)
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
 		{
 			std::cerr << RED << e.what() << NC << std::endl;
 		}
 
+
+		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
+		std::cout << "Pascal tries to sign: ";
+		pascal.signForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.signForm(form);
 		try
 		{
-			Form	form("le rachat de twitter", 0, 42);
+			std::cout << "Form trying to be signed by Pascal: ";
+			form.beSigned(pascal_mais_nul);
 		}
-		catch (std::exception& e)
+		catch (std::exception const & e)
+		{
+			std::cerr << RED << e.what() << NC << std::endl;
+		}
+		try
+		{
+			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
+			form.beSigned(pascal_mais_nul);
+		}
+		catch (std::exception const & e)
 		{
 			std::cerr << RED << e.what() << NC << std::endl;
 		}
 
+
+		std::cout << PURPLE << "-> Trying to execute: " << NC << std::endl;
+		std::cout << "Pascal tries to execute: ";
+		pascal.executeForm(form);
+		std::cout << "Pascal_mais_nul tries to execute: ";
+		pascal_mais_nul.executeForm(form);
 		try
 		{
-			Form	form("le rachat de twitter", 42, 420);
+			std::cout << "Form trying to be executed by Pascal: ";
+			form.execute(pascal);
 		}
-		catch (std::exception& e)
+		catch (std::exception const & e)
 		{
 			std::cerr << RED << e.what() << NC << std::endl;
 		}
-
 		try
 		{
-			Form	form("le rachat de twitter", 42, 0);
+			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
+			form.execute(pascal_mais_nul);
 		}
-		catch (std::exception& e)
+		catch (std::exception const & e)
 		{
 			std::cerr << RED << e.what() << NC << std::endl;
 		}
 	}
-
 	return (0);
 }
