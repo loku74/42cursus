@@ -20,6 +20,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -29,6 +30,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -45,6 +47,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -54,6 +57,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -70,6 +74,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -79,6 +84,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -102,6 +108,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -111,6 +118,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -127,6 +135,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -136,6 +145,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -152,6 +162,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -161,6 +172,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -184,6 +196,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -193,6 +206,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -209,6 +223,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -218,6 +233,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be signed by Pascal_mais_nul: ";
 			form.beSigned(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -234,6 +250,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal: ";
 			form.execute(pascal);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
@@ -243,6 +260,7 @@ int	main( void )
 		{
 			std::cout << "Form trying to be executed by Pascal_mais_nul: ";
 			form.execute(pascal_mais_nul);
+			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
 		{
