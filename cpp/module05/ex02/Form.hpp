@@ -35,7 +35,7 @@ public:
 
 	Form( std::string name, int const gradeToSign, int const gradeToExecute );
 	Form( Form const & toCopy );
-	~Form( void );
+	virtual ~Form( void );
 
 	Form&	operator=( Form const & toAssign );
 

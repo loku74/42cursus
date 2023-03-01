@@ -2,7 +2,7 @@
 
 Intern::Intern( void )
 {
-	std::cout << GRAY << "(Intern)" << GREEN << " -> Default constructor called" << NC << std::endl;
+	//std::cout << GRAY << "(Intern)" << GREEN << " -> Default constructor called" << NC << std::endl;
 }
 
 
@@ -16,7 +16,7 @@ Intern::Intern( Intern const & toCopy )
 
 Intern::~Intern( void )
 {
-	std::cout << GRAY << "(Intern)" << RED << " -> Default destructor called" << NC << std::endl;
+	//std::cout << GRAY << "(Intern)" << RED << " -> Default destructor called" << NC << std::endl;
 }
 
 
@@ -29,12 +29,36 @@ Intern&	Intern::operator=( Intern const & toAssign )
 }
 
 
+static Form*	createPresidentialPardonForm( std::string target )
+{
+	return (new PresidentialPardonForm(target));
+}
+
+
+static Form*	createRobotomyRequestForm( std::string target )
+{
+	return (new RobotomyRequestForm(target));
+}
+
+
+static Form*	createShrubberyCreationForm( std::string target )
+{
+	return (new ShrubberyCreationForm(target));
+}
+
+
 Form*	Intern::makeForm(std::string form_name, std::string target) const
 {
 	static const std::string	forms[3] = {
 			"PresidentialPardonForm",
 			"RobotomyRequestForm",
 			"ShrubberyCreationForm"
+	};
+
+	static Form* (*formFunctions[3])(std::string) = {
+		&createPresidentialPardonForm,
+		&createRobotomyRequestForm,
+		&createShrubberyCreationForm
 	};
 
 	int	index;
@@ -44,15 +68,11 @@ Form*	Intern::makeForm(std::string form_name, std::string target) const
 			break ;
 	}
 
-	switch (index)
+	if (index > 2)
 	{
-		case (0): return (new PresidentialPardonForm(target)); break ;
-		case (1): return (new RobotomyRequestForm(target)); break ;
-		case (2): return (new ShrubberyCreationForm(target)); break ;
-		default :
-			std::cerr << RED << "Form not found" << NC << std::endl;
-			break ;
+		std::cerr << RED << "Error: Form not found." << NC << std::endl;
+		return (NULL);
 	}
 
-	return (NULL);
+	return ( (*formFunctions[index])(target) );
 }

@@ -28,7 +28,7 @@ int	main( void )
 	try
 	{
 		Bureaucrat fail("test", 150);
-		std::cout << fail << std::endl;
+		std::cout << fail;
 		fail.gradeDecrement();
 	}
 	catch (std::exception & e)
@@ -39,7 +39,7 @@ int	main( void )
 	try
 	{
 		Bureaucrat fail("test", 1);
-		std::cout << fail << std::endl;
+		std::cout << fail;
 		fail.gradeIncrement();
 	}
 	catch (std::exception & e)
@@ -52,7 +52,7 @@ int	main( void )
 	Bureaucrat lol("lol", 42);
 	lol.gradeIncrement();
 	lol.gradeDecrement();
-	std::cout << lol << std::endl;
+	std::cout << lol;
 
 	return (0);
 }
