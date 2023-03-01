@@ -37,7 +37,8 @@ public:
 	int const &			getGradeToSign( void ) 		const;
 	int const &			getGradeToExecute( void ) 	const;
 
-	void	beSigned( Bureaucrat& bureaucrat );
+	void	beSigned( Bureaucrat const & bureaucrat );
+	void	execute( Bureaucrat const & executor) const = 0;
 
 private:
 

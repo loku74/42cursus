@@ -1,6 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm( Form const & form )
+ShrubberyCreationForm::ShrubberyCreationForm( std::string const target ) : Form("ShrubberyCreationForm", 25 , 5), _target(target)
 {
 
 }
@@ -20,5 +20,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm( void )
 
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=( ShrubberyCreationForm const & toAssign )
 {
+	if (this != &toAssign)
+	{
+		Form::operator=(toAssign);
+		_target = toAssign._target
+	}
 	return (*this);
 }
