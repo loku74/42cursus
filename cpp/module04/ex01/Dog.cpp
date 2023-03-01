@@ -7,7 +7,7 @@ Dog::Dog( void )
 	type = "Dog";
 	_brain = new (std::nothrow) Brain();
 	if (_brain == NULL)
-		std::cout << RED << type << "was born without brain." << NC << std::endl;
+		std::cout << RED << type << " was born without brain." << NC << std::endl;
 }
 
 
@@ -17,7 +17,7 @@ Dog::Dog( Dog const & toCopy ) : Animal()
 
 	_brain = new (std::nothrow) Brain(*toCopy._brain);
 	if (_brain == NULL)
-		std::cout << RED << type << "was born without brain." << NC << std::endl;
+		std::cout << RED << type << " was born without brain." << NC << std::endl;
 	*this = toCopy;
 }
 
