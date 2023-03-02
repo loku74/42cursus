@@ -41,12 +41,12 @@ int	main( void )
 		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
 		std::cout << "Pascal tries to sign: ";
 		pascal.signForm(form);
-		std::cout << "Pascal_mais_nul tries to execute: ";
+		std::cout << "Pascal_mais_nul tries to sign: ";
 		pascal_mais_nul.signForm(form);
 		try
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
-			form.beSigned(pascal_mais_nul);
+			form.beSigned(pascal);
 			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
@@ -129,12 +129,12 @@ int	main( void )
 		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
 		std::cout << "Pascal tries to sign: ";
 		pascal.signForm(form);
-		std::cout << "Pascal_mais_nul tries to execute: ";
+		std::cout << "Pascal_mais_nul tries to sign: ";
 		pascal_mais_nul.signForm(form);
 		try
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
-			form.beSigned(pascal_mais_nul);
+			form.beSigned(pascal);
 			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
@@ -217,12 +217,12 @@ int	main( void )
 		std::cout << PURPLE << "-> Trying to sign the form:" << NC << std::endl;
 		std::cout << "Pascal tries to sign: ";
 		pascal.signForm(form);
-		std::cout << "Pascal_mais_nul tries to execute: ";
+		std::cout << "Pascal_mais_nul tries to sign: ";
 		pascal_mais_nul.signForm(form);
 		try
 		{
 			std::cout << "Form trying to be signed by Pascal: ";
-			form.beSigned(pascal_mais_nul);
+			form.beSigned(pascal);
 			std::cout << GREEN << "success" << NC << std::endl;
 		}
 		catch (std::exception const & e)
