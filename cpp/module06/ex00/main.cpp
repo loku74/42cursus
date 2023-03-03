@@ -1,26 +1,21 @@
+#include <cctype>
 #include <iostream>
 #include <cstdlib>
 #include <ostream>
+#include <inttypes.h>
 #include "colors.h"
+#include <cstdio>
+#include <string>
+#include <cerrno>
 
-enum e_type
+static void	printChar( const std::string& type )
 {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE
-};
+	char	toPrint = type[0];
 
-static e_type	get_type( const char* type_c )
-{
-	std::string type(type_c);
-
-	// char check
-	if (type.size() == 1 && type_c[0] >= 32 && type_c[0] <= 126)
-		return (CHAR);
-	
-	// int check
-	
+	std::cout << "char: " << toPrint << std::endl;
+	std::cout << "int: " << static_cast<int>(toPrint) << std::endl;
+	std::cout << "float: " << static_cast<float>(toPrint) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(toPrint) << std::endl;
 }
 
 int	main( int argc, char** argv )
@@ -31,7 +26,12 @@ int	main( int argc, char** argv )
 		return (1);
 	}
 
-	e_type	type = get_type(argv[1]);
+	char*		type_c = argv[1];
+	std::string	type(argv[1]);
+
+	if (type.size() == 1 && std::isprint(type_c[0]))
+		printChar(type);
+
 
 	return (0);
 }
