@@ -10,12 +10,6 @@
 
 ## Please use configure script
 
-# Colors
-GREEN = \033[1;32m
-PURPLE = \033[1;35m
-CYAN = \033[1;36m
-YELLOW = \033[1;33m
-NC = \033[0m
 
 INC	=%%%%
 
@@ -48,14 +42,12 @@ all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	@printf "${YELLOW}-> Compiling: ${CYAN}$<${YELLOW}...${NC}"
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@printf "${GREEN} OK!${NC}\n"
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ)
-	@ar -r $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@cp $(NAME) $(NAME_UNAME)
+	ar -r $(NAME) $(OBJ)
+	ranlib $(NAME)
+	cp $(NAME) $(NAME_UNAME)
 
 check: all
 	@test/run_tests.sh

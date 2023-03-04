@@ -1,12 +1,6 @@
 #include <cctype>
 #include <iostream>
-#include <cstdlib>
-#include <ostream>
-#include <inttypes.h>
 #include "colors.h"
-#include <cstdio>
-#include <string>
-#include <cerrno>
 
 static void	printChar( const std::string& type )
 {
@@ -31,6 +25,7 @@ int	main( int argc, char** argv )
 
 	if (type.size() == 1 && std::isprint(type_c[0]))
 		printChar(type);
+
 
 
 	return (0);

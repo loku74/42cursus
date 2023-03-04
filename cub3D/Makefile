@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+         #
+#    By: ratinax <ratinax@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:49:28 by lbourniq          #+#    #+#              #
-#    Updated: 2023/02/28 16:35:00 by lbourniq         ###   ########.fr        #
+#    Updated: 2023/03/04 11:22:58 by lbourniq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-Ofast
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-fsanitize=address -g3
 MAKE_FLAG = --no-print-directory
 
 # MinilibX lib and flags
@@ -127,20 +127,20 @@ makemlx:
 
 $(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
-	@printf "${GREEN}-> $(NAME) executable compiled successfully${NC}\n"
+	@printf "${GREEN}-> cub3D executable compiled successfully${NC}\n"
 
 clean:
 	@make -C $(LIBFT_DIR) clean $(MAKE_FLAG)
 	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS)
-	@printf "${PURPLE}-> All $(NAME) objs files removed successfully${NC}\n"
+	@printf "${PURPLE}-> All cub3D objs files removed successfully${NC}\n"
 
 
 fclean:
 	@make -C $(LIBFT_DIR) fclean $(MAKE_FLAG)
 	@make -C $(MLX_DIR) clean $(MAKE_FLAG)
 	@$(RM) $(RM_FLAGS) $(OBJS) $(NAME)
-	@printf "${PURPLE}-> All $(NAME) objs files and $(NAME) executable removed successfully${NC}\n"
+	@printf "${PURPLE}-> All cub3D objs files and $(NAME) executable removed successfully${NC}\n"
 
 re: fclean all
 

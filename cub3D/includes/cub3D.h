@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ratinax <ratinax@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:54:05 by lbourniq          #+#    #+#             */
-/*   Updated: 2023/02/28 14:47:14 by tibernot         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:20:56 by ratinax          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdint.h>
 
 # define WINDOW_NAME    "cub3D"
-# define PLAYER_SPEED   0.1
+# define PLAYER_SPEED   0.2
 # define ANGLE_SPEED	5
 # define PI				3.14159265359
 # define PI2            1.57079632679
@@ -32,8 +32,8 @@
 # define PI_2			6.28318530718
 # define MAX_RAY_LEN	1000000000
 # define ONE_DEGREE		0.01745329251
-# define WINDOW_X		1920	
-# define WINDOW_Y		1080	
+# define WINDOW_X		1920
+# define WINDOW_Y		1080
 # define EXTENSION_LEN  4
 # define N_IDENTIFIERS	6
 # define N_TEXTURES		4
@@ -180,6 +180,7 @@ struct s_wall_img
 	double		y;
 	double		x;
 	t_textures	*img;
+	double		up_of_line;
 };
 
 // --- INITIALIZE ---
@@ -276,7 +277,7 @@ void		put_background(t_data *d, int lineH, int up_of_line, int x);
 
 // [get_thing_to_put.c]
 t_textures	*get_texture_to_put(t_data *d, t_wall wall, t_wall_img *wall_img);
-uint32_t	pixel_to_put(t_wall_img wall_img, t_textures *img);
+uint32_t	pixel_to_put(t_textures *img, int pixel_addr);
 
 // [get_put_walls_data.c]
 int			get_nb_rays(int i, t_wall *walls);

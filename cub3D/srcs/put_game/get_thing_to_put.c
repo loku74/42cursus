@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_thing_to_put.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibernot <tibernot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ratinax <ratinax@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 12:04:59 by tibernot          #+#    #+#             */
-/*   Updated: 2023/02/28 15:10:19 by tibernot         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:05:12 by ratinax          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_textures	*get_texture_to_put(t_data *d, t_wall wall, t_wall_img *wall_img)
 {
 	if (wall.orientation == VERTICAL)
 	{
+		wall_img->x = wall.y;
 		if (wall.angle > PI2 && wall.angle < PI3)
 		{
 			wall_img->x *= -1;
@@ -26,6 +27,7 @@ t_textures	*get_texture_to_put(t_data *d, t_wall wall, t_wall_img *wall_img)
 	}
 	else
 	{
+		wall_img->x = wall.x;
 		if (wall.angle > PI)
 			return (d->textures[NO]);
 		else
@@ -36,14 +38,8 @@ t_textures	*get_texture_to_put(t_data *d, t_wall wall, t_wall_img *wall_img)
 	}
 }
 
-uint32_t	pixel_to_put(t_wall_img wall_img, t_textures *img)
+uint32_t	pixel_to_put(t_textures *img, int pixel_addr)
 {
-	int	pixel_addr;
-
-	pixel_addr = ((int)((wall_img.y * img->img_height - 1)
-				/ wall_img.line_h)) * img->line_length
-		+ (int)(wall_img.x * img->img_width)
-		* img->bits_per_pixel;
 	return (create_trgb(img->addr[pixel_addr], img->addr[pixel_addr + 1], \
 	img->addr[pixel_addr + 2], img->addr[pixel_addr + 3]));
 }
