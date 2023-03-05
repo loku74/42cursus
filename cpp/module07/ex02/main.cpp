@@ -19,7 +19,7 @@ int	main( void )
 		}
 	}
 
-	std::cout << "\n--- strings ---" << std::endl;
+	std::cout << "\n--- strings + copy ---" << std::endl;
 	{
 		Array<std::string>	test(3);
 
@@ -27,20 +27,29 @@ int	main( void )
 		test[1] = "Module";
 		test[2] = "7";
 
-		for (unsigned int i = 0; i < test.size(); i++)
-			std::cout << test[i] << " ";
+		Array<std::string>	test2(test);
+
+		for (unsigned int i = 0; i < test2.size(); i++)
+			std::cout << test2[i] << " ";
 		std::cout << std::endl;
 	}
 
-	std::cout << "--- long ---" << std::endl;
+	std::cout << "--- long + assignment ---" << std::endl;
 	{
 		Array<long>	test(100);
+		Array<long> copy;
 
 		for (long i = 0; i < test.size(); i++)
-		{
 			test[i] = (i + 1) * 42;
-			std::cout << test[i] << " ";
-		}
+
+		copy = test;
+
+		for (long i = 0; i < test.size(); i++)
+			test[i] = 0;
+
+		for (long i = 0; i < copy.size(); i++)
+			std::cout << copy[i] << " ";
+
 		std::cout << std::endl;
 	}
 
