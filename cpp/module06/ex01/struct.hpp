@@ -2,5 +2,7 @@
 
 struct Data
 {
-	int	veryImportantDataThatShouldNotBeReadByAnyone;
+	int		a;
+	float	b;
+	char	c;
 };

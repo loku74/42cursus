@@ -28,7 +28,7 @@ HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -03 #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -O3 #-fsanitize=address -g3
 MAKE_FLAG = --no-print-directory
 
 # MinilibX lib and flags

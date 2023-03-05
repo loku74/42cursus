@@ -75,4 +75,5 @@ void	free_all(t_data *data)
 		free_split(data->map);
 	destroy_all_images(data);
 	destroy_mlx(data->mlx);
+	close(data->map_fd);
 }
