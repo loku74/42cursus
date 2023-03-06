@@ -1,6 +1,7 @@
 #include "Class.hpp"
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
 
 Base*	generate( void )
 {
@@ -52,7 +53,7 @@ void	identify( Base& p )
 
 int	main( void )
 {
-	std::srand(std::time(NULL));
+	srand(time(NULL));
 
 	Base*	ptr = generate();
 

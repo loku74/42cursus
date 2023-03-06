@@ -1,5 +1,6 @@
 #include "struct.hpp"
 #include <iostream>
+#include <stdint.h>
 
 static uintptr_t	serialize( Data* ptr )
 {
