@@ -73,7 +73,7 @@ Array<T>::Array( unsigned int size ) : _size(size)
 template<typename T>
 T&	Array<T>::operator[]( unsigned int index )
 {
-	if (index > _size)
+	if (index >= _size)
 		throw OutOfRangeException();
 
 	return (_array[index]);
