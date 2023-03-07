@@ -60,7 +60,7 @@ int	main( void )
 	std::cout << YELLOW << "-> With the addNumbers function (using iterators):" << NC << std::endl;
 	{
 		Span				test(1);
-		std::vector<int>			fill;
+		std::vector<int>	fill;
 
 		for (int i = 0; i < 10; i++)
 			fill.push_back(i);
