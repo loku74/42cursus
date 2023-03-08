@@ -13,41 +13,39 @@ int	main( int ac, char **av )
 	}
 
 	std::string	input(av[1]);
-	std::string charset = "+-*/ ";
 	RPN			stack;
 
 	for (size_t i = 0; i < input.size(); i++)
 	{
 		if (isdigit(input[i]))
+		{
 			stack.push(input[i] - '0');
+			continue ;
+		}
 		else if (i + 1 < input.size() && input[i] == '-' && isdigit(input[i + 1]))
 		{
 			stack.push(-(input[i + 1] - '0'));
 			i++;
+			continue ;
 		}
-		else if (charset.find_first_of(input[i]) != std::string::npos)
+		try
 		{
-			try
+			switch (input[i])
 			{
-				if (input[i] == '+')
-					stack.add();
-				else if (input[i] == '-')
-					stack.subtract();
-				else if (input[i] == '*')
-					stack.multiply();
-				else if (input[i] == '/')
-					stack.divide();
-			}
-			catch (const std::exception& e)
-			{
-				std::cerr << RED << e.what() << NC << std::endl;
-				return (2);
+				case '+': stack.add();		continue ;
+				case '-': stack.subtract();	continue ;
+				case '*': stack.multiply();	continue ;
+				case '/': stack.divide();	continue ;
+				case ' ': 					continue ;
+				default:
+					std::cerr << RED << "Error: invalid character(s)." << NC << std::endl;
+					return (3);
 			}
 		}
-		else
+		catch (const std::exception& e)
 		{
-			std::cerr << RED << "Error: invalid character(s)." << NC << std::endl;
-			return (3);
+			std::cerr << RED << e.what() << NC << std::endl;
+			return (2);
 		}
 	}
 
