@@ -101,6 +101,9 @@ void	RPN::divide( void )
 	int b = _rpnStack.top();
 	_rpnStack.pop();
 
+	if (a == 0)
+		throw DivisionByZeroException();
+
 	_rpnStack.push(b / a);
 	_stored--;
 }

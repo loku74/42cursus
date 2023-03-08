@@ -1,6 +1,10 @@
 #include "MutantStack.hpp"
-#include "colors.h"
 #include <list>
+
+/* colors */
+# define YELLOW "\033[1;33m"
+# define ORANGE "\033[38;5;208m"
+# define NC "\033[0m"
 
 int	main( void )
 {
@@ -18,7 +22,18 @@ int	main( void )
 		mstack.push( 3 );
 		mstack.push( 5 );
 		mstack.push( 737 );
-		mstack.push( 0 );
+		mstack.push( 3 );
+
+		std::cout << YELLOW << "Copy of mstack (with copy constructor):" << NC << std::endl;
+		MutantStack<int> copy(mstack);
+		std::cout << "mstack.top(): " << mstack.top() << std::endl;
+		std::cout << "copy.top(): " << copy.top() << std::endl;
+
+		std::cout << YELLOW << "Copy of copy (with assignment operator):" << NC << std::endl;
+		MutantStack<int> copyOfCopy;
+		copyOfCopy = copy;
+		std::cout << "copy.top(): " << copy.top() << std::endl;
+		std::cout << "copyOfCopy.top(): " << copyOfCopy.top() << std::endl;
 
 		MutantStack<int>::iterator it = mstack.begin();
 		MutantStack<int>::iterator ite = mstack.end();

@@ -10,7 +10,7 @@ class MutantStack : public std::stack<T>
 public:
 
 	MutantStack( void ) { };
-	MutantStack( MutantStack const & toCopy )
+	MutantStack( MutantStack const & toCopy ) : std::stack<T>()
 	{
 		*this = toCopy;
 	}
