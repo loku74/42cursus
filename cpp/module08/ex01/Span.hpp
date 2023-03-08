@@ -4,7 +4,6 @@
 #include <vector>
 #include <algorithm>
 #include <climits>
-#include "colors.h"
 
 class Span
 {
@@ -45,12 +44,12 @@ public:
 
 	/* Templated functions(s) */
 	template<typename it>
-	void			addNumbers( it first, it last )
+	void			addNumbers( it start, it end )
 	{
-		while (first != last)
+		while (start != end)
 		{
-			addNumber(*first);
-			first++;
+			addNumber(*start);
+			start++;
 		}
 	}
 

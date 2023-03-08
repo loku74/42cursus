@@ -1,9 +1,16 @@
 #include "easyfind.hpp"
-#include "colors.h"
 
 #include <iostream>
 #include <vector>
 #include <list>
+
+/* colors */
+# define RED "\033[1;31m"
+# define YELLOW "\033[1;33m"
+# define ORANGE "\033[38;5;208m"
+# define BLUE "\033[1;36m"
+# define GREEN "\033[1;32m"
+# define NC "\033[0m"
 
 int	main( void )
 {

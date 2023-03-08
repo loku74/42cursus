@@ -1,5 +1,11 @@
 #include "Span.hpp"
 
+/* colors */
+# define RED "\033[1;31m"
+# define YELLOW "\033[1;33m"
+# define ORANGE "\033[38;5;208m"
+# define NC "\033[0m"
+
 int	main( void )
 {
 

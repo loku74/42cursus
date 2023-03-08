@@ -31,6 +31,15 @@ public:
 
 	};
 
+	class DivisionByZeroException : public std::exception
+	{
+		virtual const char* what( void ) const throw()
+		{
+			return ("Error: Division by zero.");
+		}
+
+	};
+
 	/* Member function(s) */
 	void	push( int n );
 	void	add( void );
