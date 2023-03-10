@@ -5,8 +5,8 @@
 
 static void	insertionSort( std::vector<unsigned int>& A )
 {
-	int	value;
-	int	hole;
+	unsigned int	value;
+	unsigned int	hole;
 
 	for (size_t i = 1; i < A.size(); i++)
 	{
@@ -87,12 +87,12 @@ int	main( int ac, char** av )
 	for (int i = 0; av[i]; i++)
 		A.push_back(static_cast<unsigned int>(std::atoi(av[i])));
 
-	auto start = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
 	mergeInsertSort(A, (A.size() / 100) + 2);
-	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point  end = std::chrono::high_resolution_clock::now();
 
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+	std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	std::cout << "Time taken by function: " << duration.count() << " microseconds" << std::endl;
 
 	return (0);
