@@ -56,6 +56,6 @@ int	main( void )
 
 		std::cout << "is P in ABC triangle ? : " << boolToString(bsp( A, B, C, point )) << std::endl;
 	}
-§
+
 	return (0);
 }

@@ -1,8 +1,12 @@
 #include "PmergeMe.hpp"
 
 #include <vector>
+#include <list>
+#include <deque>
+#include <chrono>
 
-static void	insertionSort( std::vector<int>& A )
+template<typename T>
+static void	insertionSort( T& A )
 {
 	int	value;
 	int	hole;
@@ -21,7 +25,8 @@ static void	insertionSort( std::vector<int>& A )
 }
 
 
-static void merge( std::vector<int>& L, std::vector<int>& R, std::vector<int>& A )
+template<typename T>
+static void merge( T& L , T& R, T& A )
 {
 	size_t	i;
 	size_t	j;
@@ -60,28 +65,25 @@ static void merge( std::vector<int>& L, std::vector<int>& R, std::vector<int>& A
 	}
 }
 
-
-static void	mergeSort( std::vector<int>& A )
+template<typename T>
+static void	mergeInsertSort( T& A, size_t threshold )
 {
-	std::vector<int>	left;
-	std::vector<int>	right;
-
 	size_t	mid;
 	size_t	n = A.size();
 
-	if (n < 2)
+	if (n < threshold)
+	{
+		insertionSort(A);
 		return ;
+	}
 
 	mid = n / 2;
 
-	for (size_t i = 0; i < mid; i++)
-		left.push_back(A[i]);
+	T	left(A.begin(), A.begin() + mid);
+	T	right(A.begin() + mid, A.end());
 
-	for (size_t i = mid; i < n; i++)
-		right.push_back(A[i]);
-
-	mergeSort(left);
-	mergeSort(right);
+	mergeInsertSort(left, threshold);
+	mergeInsertSort(right, threshold);
 	merge(left, right, A);
 }
 
@@ -90,16 +92,16 @@ int	main( void )
 {
 	std::vector<int> A;
 
-	for (int i = 11; i > 0; i--)
+	for (int i = 5; i > 0; i--)
 		A.push_back(i);
 
-	for (int i = 0; i < A.size(); i++)
-		std::cout << A[i] << " ";
+	auto start = std::chrono::high_resolution_clock::now();
 
-	mergeSort(A);
-	std::cout << "\n";
+	mergeInsertSort(A, 20);
+	auto end = std::chrono::high_resolution_clock::now();
 
-	for (int i = 0; i < A.size(); i++)
-		std::cout << A[i] << " ";
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+	std::cout << "Time taken by function: " << duration.count() << " microseconds" << std::endl;
+
 	return (0);
 }

@@ -32,11 +32,20 @@ public:
 		if (this != &toAssign)
 		{
 			_size = toAssign._size;
-			_array = new T[_size];
 
-			for (unsigned int i = 0; i < _size; i++)
-				_array[i] = toAssign._array[i];
+			if (_array)
+			{
+				delete _array;
+
+				_array = new T[_size];
+
+				for (unsigned int i = 0; i < _size; i++)
+					_array[i] = toAssign._array[i];
+			}
+			else
+				_array = NULL;
 		}
+
 		return (*this);
 	}
 
