@@ -1,18 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <vector>
+#include <stddef.h>
 
-class PmergeMe
-{
-
-public:
-
-	PmergeMe( void );
-	PmergeMe( PmergeMe const & toCopy );
-	~PmergeMe( void );
-
-	PmergeMe&	operator=( PmergeMe const & toAssign );
-
-private:
-
-};
+void	mergeInsertSort( std::vector<size_t>& A, size_t threshold );
