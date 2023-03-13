@@ -27,11 +27,10 @@ int	main( int ac, char** av )
 
 	elapsed_time = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;
 
+	printFirst("After:   ", GREEN, vector);
+
 	if (!isSorted(vector.begin(), vector.end()))
 		std::cout << RED << "Error while sorting std::vector" << NC << std::endl;
-
-
-	printFirst("After:   ", GREEN, vector);
 	std::cout << "Time to process a range of " << ORANGE << ac - 1 << NC << " elements with " << PURPLE << "std::vector" << NC << ": " << BLUE << elapsed_time << NC << " microseconds." << std::endl;
 
 	start = clock();

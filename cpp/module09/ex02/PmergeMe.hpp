@@ -14,6 +14,9 @@
 #include <vector>
 #include <deque>
 #include <stddef.h>
+#include <algorithm>
+#include <cstring>
+#include <cerrno>
 
 bool	check_input( int& ac, char** av, std::vector<size_t>& vector );
 void	printFirst( std::string text, std::string color, std::vector<size_t>& vector );
@@ -70,10 +73,7 @@ bool	isSorted( T start, T end )
 	while (start != end - 1)
 	{
 		if (*start > *(start + 1))
-		{
-			std::cout << *start;
 			return (false);
-		}
 		start++;
 	}
 
