@@ -34,7 +34,7 @@ int	main( int ac, char** av )
 	std::cout << "Time to process a range of " << ORANGE << ac - 1 << NC << " elements with " << PURPLE << "std::vector" << NC << ": " << BLUE << elapsed_time << NC << " microseconds." << std::endl;
 
 	start = clock();
-	mergeInsertSort(deque, (vector.size() / 100) + 2);
+	mergeInsertSort(deque, (deque.size() / 100) + 2);
 	end = clock();
 
 	elapsed_time = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;

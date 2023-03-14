@@ -4,6 +4,7 @@
 #include <iostream> // std::cout, cin...
 #include <map> // std::map
 #include <cstdlib> // strtof
+#include <cerrno>
 
 /* Colors */
 # define RED "\033[1;31m"
@@ -15,4 +16,7 @@
 # define GRAY "\033[1;90m"
 # define NC "\033[0m"
 
-bool	openCsv( std::ifstream& dataSetFd );
+bool	openCsv( std::ifstream& dataSetFd, const char* filename );
+void	split( const std::string& str, const char delimiter, std::string& left, std::string& right );
+bool	check_args( const int& ac );
+bool	check_value( const char* str, size_t size );
