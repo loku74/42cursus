@@ -12,7 +12,7 @@
 # define GREEN "\033[1;32m"
 # define NC "\033[0m"
 
-bool	openCsv( std::ifstream& dataSetFd, const char* filename );
+bool	open_file( std::ifstream& fd, const char* filename );
 void	split( const std::string& str, const char delimiter, std::string& left, std::string& right );
 bool	check_args( const int& ac );
 bool	check_values( const char* right, std::string& left );

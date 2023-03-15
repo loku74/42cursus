@@ -7,7 +7,7 @@ int	main( int ac, char **av )
 
 	std::ifstream	dataSetFd;
 	std::ifstream	inputFd;
-	if (!openCsv(dataSetFd, "data.csv") || !openCsv(inputFd, av[1]))
+	if (!open_file(dataSetFd, "data.csv") || !open_file(inputFd, av[1]))
 		return (2);
 
 	std::map<std::string, float>	dataSet;

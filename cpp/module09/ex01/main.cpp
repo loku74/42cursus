@@ -6,7 +6,7 @@
 int	main( int ac, char **av )
 {
 
-	if (ac != 2 )
+	if (ac != 2)
 	{
 		std::cerr << RED << "Error: invalid number of argument(s)." << NC << std::endl;
 		return (1);

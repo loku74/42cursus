@@ -1,9 +1,9 @@
 #include "BitcoinExchange.hpp"
 
-bool	openCsv( std::ifstream& dataSetFd, const char* filename )
+bool	open_file( std::ifstream& fd, const char* filename )
 {
-	dataSetFd.open(filename);
-	if (!dataSetFd.is_open())
+	fd.open(filename);
+	if (!fd.is_open())
 	{
 		std::cerr << RED << "Couldn't open " << filename << "." << NC << std::endl;
 		return (false);
