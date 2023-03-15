@@ -19,4 +19,4 @@
 bool	openCsv( std::ifstream& dataSetFd, const char* filename );
 void	split( const std::string& str, const char delimiter, std::string& left, std::string& right );
 bool	check_args( const int& ac );
-bool	check_value( const char* str, size_t size );
+bool	check_values( const char* right, std::string& left );

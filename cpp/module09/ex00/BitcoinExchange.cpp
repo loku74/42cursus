@@ -44,28 +44,79 @@ bool	check_args( const int& ac )
 }
 
 
-bool	check_value( const char* str, size_t size )
+bool	check_values( const char* right, std::string& left )
 {
 	unsigned int	dotCount(0);
+	size_t size = strlen(right);
 
-	if (str[0] == ' ')
-		str++;
-	else
+	if (size <= 1 || right[0] != ' ' || (size == 2 && !isdigit(right[1])))
+	{
+		std::cerr << RED << "Error: no value found." << NC << std::endl;
 		return (false);
+	}
+	right++; // to pass the first ' ' in the char*
+	size--; // adjusting right length
 
 	for (size_t i = 0; i < size; i++)
 	{
-		if (dotCount > 1 || (i == 0 && !isdigit(str[i]) && str[i] != '-'))
-			return (false);
-
-		if (str[i] == '.')
+		if (dotCount > 1)
 		{
-			dotCount++;
-			continue ;
+			std::cerr << RED << "Error: invalid float value." << NC << std::endl;
+			return (false);
+		}
+		if (i != 0 && right[i] != '.' && !isdigit(right[i]))
+		{
+			std::cerr << RED << "Error: invalid value (numeric characters required)." << NC << std::endl;
+			return (false);
 		}
 
-		if (!isdigit(str[i]) && str[i] != '-')
-			return (false);
+		switch (right[i])
+		{
+			case '.':
+				if (i + 1 == size)
+				{
+					std::cerr << RED << "Error: invalid float value." << NC << std::endl;
+					return (false);
+				}
+				dotCount++;
+				continue ;
+
+			case '-':
+				std::cerr << RED << "Error: value is not a positive number" << NC << std::endl;
+				return (false);
+		}
 	}
+
+	if (left.size() != 11 || left[left.size() - 1] != ' ')
+	{
+		std::cerr << RED << "Error: invalid date format." << NC << std::endl;
+		return (false);
+	}
+	for (size_t i = 0; i < left.size(); i++)
+	{
+		if (i < 4 && !isdigit((left.c_str())[i]))
+		{
+			std::cerr << RED << "Error: invalid year." << NC << std::endl;
+			return (false);
+		}
+		else if (i > 4 && i < 7 && !isdigit((left.c_str())[i]))
+		{
+			std::cerr << RED << "Error: invalid month." << NC << std::endl;
+			return (false);
+		}
+		else if (i > 7 && i < 10 && !isdigit((left.c_str())[i]))
+		{
+			std::cerr << RED << "Error: invalid month." << NC << std::endl;
+			return (false);
+		}
+		else if ((i == 4 || i == 7) && left[i] != '-')
+		{
+			std::cerr << RED << "Error: invalid date format." << NC << std::endl;
+			return (false);
+		}
+	}
+
+	left.resize(left.size() - 1);
+
 	return (true);
 }
