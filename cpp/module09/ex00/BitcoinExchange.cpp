@@ -44,18 +44,39 @@ bool	check_args( const int& ac )
 }
 
 
+static bool	isLeap(int year)
+{
+	if (year % 4 != 0)
+		return false;
+	else if (year % 100 != 0)
+		return true;
+	else if (year % 400 != 0)
+		return false;
+	return true;
+}
+
 bool	check_values( const char* right, std::string& left )
 {
 	unsigned int	dotCount(0);
 	size_t size = strlen(right);
 
-	if (size <= 1 || right[0] != ' ' || (size == 2 && !isdigit(right[1])))
+	if (size == 0)
 	{
 		std::cerr << RED << "Error: no value found." << NC << std::endl;
 		return (false);
 	}
+	if (right[0] != ' ')
+	{
+		std::cerr << RED << "Error: invalid value input. Space needed after \"|\"" << NC << std::endl;
+		return (false);
+	}
 	right++; // to pass the first ' ' in the char*
 	size--; // adjusting right length
+	if (size <= 1 && !isdigit(right[0]))
+	{
+		std::cerr << RED << "Error: invalid value input; number required." << NC << std::endl;
+		return (false);
+	}
 
 	for (size_t i = 0; i < size; i++)
 	{
@@ -82,7 +103,7 @@ bool	check_values( const char* right, std::string& left )
 				continue ;
 
 			case '-':
-				std::cerr << RED << "Error: value is not a positive number" << NC << std::endl;
+				std::cerr << RED << "Error: value is not a positive number." << NC << std::endl;
 				return (false);
 		}
 	}
@@ -117,6 +138,34 @@ bool	check_values( const char* right, std::string& left )
 	}
 
 	left.resize(left.size() - 1);
+
+	int year, month, day;
+	int	days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	year = atoi(left.c_str());
+	if (isLeap(year))
+		days[1] = 29;
+	month = atoi(left.c_str() + 5);
+	day = atoi(left.c_str() + 8);
+
+	if (month <= 0 || month > 12)
+	{
+		std::cerr << RED << "Error: " << month << " is not a valid month." << NC << std::endl;
+		return (false);
+	}
+	if (day <= 0 || day > 31)
+	{
+		std::cerr << RED << "Error: " << day << " is not valid day." << NC << std::endl;
+		return (false);
+	}
+	if (day > days[month - 1])
+	{
+		std::cerr << RED << "Error: " << day << " is not a valid day in month " << month << "." << NC;
+		if (month == 2 && days[1] == 28)
+			std::cerr << RED << " Year is not leap." << NC;
+		std::cerr << std::endl;
+		return (false);
+	}
 
 	return (true);
 }

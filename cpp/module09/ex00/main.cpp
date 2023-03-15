@@ -1,17 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-static bool	isLeap( int& year )
-{
-	if (year % 4 != 0)
-		return (false);
-	else if (year % 100 != 0)
-		return (true);
-	else if (year % 400 != 0)
-		return (false);
-	return (true);
-}
-
-
 int	main( int ac, char **av )
 {
 	if (check_args(ac))
@@ -32,9 +20,7 @@ int	main( int ac, char **av )
 	dataSetFd.close();
 
 	float		value;
-	std::string	toFind;
-	int	year, month, day;
-	int	days[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	std::map<std::string, float>::iterator it;
 
 	while (std::getline(inputFd, line))
 	{
@@ -42,7 +28,7 @@ int	main( int ac, char **av )
 			continue;
 		if (line.find('|') == std::string::npos)
 		{
-			std::cerr << RED << "Error: bad input -> \"" << line << "\"" << NC << std::endl;
+			std::cerr << RED << "Error: bad input -> \"" << line << "\"." << NC << std::endl;
 			continue ;
 		}
 
@@ -59,29 +45,16 @@ int	main( int ac, char **av )
 			continue ;
 		}
 
+		it = dataSet.lower_bound(left);
+		if (left != dataSet.begin()->first && it == dataSet.begin())
+		{
+			std::cerr << RED << "Error: bitcoin did not exist in " << left << "." << NC << std::endl;
+			continue ;
+		}
+		while (it->first > left && it != dataSet.begin())
+			it--;
 
-		year = atoi(left.c_str());
-		if (isLeap(year))
-			days[1] = 29;
-		else
-			days[1] = 28;
-		month = atoi(left.c_str() + 5);
-		if (month < 1 || month > 12)
-		{
-			std::cerr << RED << "Error: invalid month." << NC << std::endl;
-			continue ;
-		}
-		day = atoi(left.c_str() + 8);
-		if (day < 1 || day > days[month])
-		{
-			std::cerr << RED << "Error: invalid day." << NC << std::endl;
-			continue ;
-		}
-		while (true)
-		{
-			toFind = next_date(year, month, day);
-			std::cout << left << " -> " << value << " = " << value * dataSet[left] << std::endl;
-		}
+		std::cout << left << " -> " << value << " = " << GREEN << value * it->second << NC << std::endl;
 	}
 	inputFd.close();
 
