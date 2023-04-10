@@ -1,0 +1,56 @@
+version: '3'
+
+volumes:
+  db_data:
+   driver: local
+   driver_opts:
+     type: none
+     device: /home/lbourniq/data/mysql 
+     o: bind
+  wordpress_data:
+   driver: local
+   driver_opts:
+     type: none
+     device: /home/lbourniq/data/wordpress
+     o: bind
+     
+services:
+  mariadb:
+    build: requirements/mariadb
+    container_name: mariadb
+    env_file:
+     - .env
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - docker-network
+
+  wordpress:
+    depends_on:
+      - mariadb
+    env_file:
+     - .env
+    build:  requirements/wordpress
+    container_name: wordpress 
+    restart: always
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - docker-network
+
+  nginx:
+    depends_on:
+      - wordpress
+    container_name: nginx 
+    build: requirements/nginx
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - docker-network
+
+networks:
+ docker-network:
