@@ -10,7 +10,6 @@ then
 
 mysql_secure_installation << EOF
 
-y
 n
 y
 y
