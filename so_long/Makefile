@@ -26,7 +26,7 @@ HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -Ofast #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-fsanitize=address
 
 # MinilibX lib and flags
 
@@ -124,13 +124,13 @@ OBJS = $(ALL_SRCS:.c=.o)
 
 all: $(NAME)
 
-$(LIBFT): FORCE
-	@make $(LIBFT_NAME) -C $(LIBFT_DIR)
+makelibft:
+	@make -C $(LIBFT_DIR)
 
-$(MLX): FORCE
-	@make libmlx.a -C $(MLX_DIR)
+makemlx:
+	@make -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJS)
+$(NAME): makelibft makemlx $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -lm $(MLX) $(LIBFT) -o $(NAME)
 	@echo "${GREEN}-> so_long executable compiled successfully${NC}"
 
@@ -154,4 +154,3 @@ bonus:
 	@make $(NAME)
 
 .PHONY: all re fclean clean bonus FORCE
-FORCE:
