@@ -6,7 +6,7 @@
 #    By: ratinax <ratinax@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 09:49:28 by lbourniq          #+#    #+#              #
-#    Updated: 2023/03/04 11:22:58 by lbourniq         ###   ########.fr        #
+#    Updated: 2023/03/01 11:30:56 by ratinax          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) -O3 #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER_DIR) #-fsanitize=address -g3#-Ofast
 MAKE_FLAG = --no-print-directory
 
 # MinilibX lib and flags
